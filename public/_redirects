@@ -1,0 +1,15 @@
+# Avesh Technologies - Netlify Clean URL Routing Rules
+/product/:slug      /product-detail.html?slug=:slug   200
+/products           /products.html                    200
+/catalog            /products.html                    200
+/cart               /cart.html                        200
+/checkout           /cart.html                        200
+/affiliate          /affiliate.html                   200
+/influencer         /affiliate.html                   200
+/creator            /affiliate.html                   200
+/creator-dashboard  /creator-dashboard.html           200
+/track              /order-tracking.html              200
+/order-tracking     /order-tracking.html              200
+/contact            /contact.html                     200
+/about              /about.html                       200
+

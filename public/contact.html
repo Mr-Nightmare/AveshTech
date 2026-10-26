@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon with Official Avesh Tech Logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact &amp; Support | Avesh Technologies</title>
+  <meta name="description" content="Get in touch with Avesh Technologies for custom 3D printing orders, personalized shadow lamps, IoT prototypes and customer support in New Delhi, India.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            primaryHover: '#1e40af',
+            secondary: '#f97316',
+            secondaryHover: '#ea580c',
+            dark: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#1d4ed8] text-white border-b border-blue-600/40 shadow-lg sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20">
+        <div class="flex flex-col leading-tight">
+          <span class="text-[10px] tracking-[0.25em] text-blue-200 font-bold uppercase">AVESH TECH</span>
+          <span class="text-xl font-black text-white">Avesh Technologies</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-3 text-xs font-bold">
+        <a href="index.html" class="text-blue-100 hover:text-white transition">Home</a>
+        <a href="products.html" class="text-blue-100 hover:text-white transition">Products</a>
+        <a href="affiliate.html" class="flex items-center gap-1.5 text-xs font-black bg-amber-400 hover:bg-amber-300 text-black px-3 py-1.5 rounded-xl transition shadow-sm">
+          <i class="fa-solid fa-coins text-black"></i>
+          <span>Creator Hub</span>
+        </a>
+        <button onclick="window.AveshAuth.openAuthModal()" id="header-auth-btn" class="header-auth-btn group flex items-center gap-2 text-xs font-semibold bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md transition-all duration-200 shadow-sm cursor-pointer active:scale-95" title="Sign In or Register">
+          <div class="w-4 h-4 rounded-full bg-blue-400/30 flex items-center justify-center group-hover:bg-blue-400/50 transition">
+            <i class="fa-regular fa-user text-[10px] text-blue-100"></i>
+          </div>
+          <span id="header-auth-label" class="tracking-wide">Sign In</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
+    
+    <div class="max-w-3xl mb-8">
+      <div class="text-xs text-gray-400 mb-1 flex items-center gap-1.5">
+        <a href="index.html" class="hover:text-primary">Home</a>
+        <i class="fa-solid fa-chevron-right text-[9px]"></i>
+        <span class="text-gray-700 font-semibold">Contact &amp; Support</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight mb-2">Get in Touch With Our Team</h1>
+      <p class="text-xs sm:text-sm text-gray-500 leading-relaxed">
+        Whether you have a custom 3D printing requirement, need a personalized shadow lamp with custom photos, or need assistance with your IoT hardware order, we are here to help.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+      
+      <!-- Contact Form (7 cols) -->
+      <div class="lg:col-span-7 bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        <h2 class="text-xl font-black text-gray-900 mb-1">Send Us a Direct Message</h2>
+        <p class="text-xs text-gray-500 mb-6">We typically reply within 2-4 hours during business hours.</p>
+
+        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-gray-700 mb-1">Your Name *</label>
+              <input type="text" id="contact-name" required placeholder="Your Full Name" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block font-bold text-gray-700 mb-1">Mobile / WhatsApp Number *</label>
+              <input type="tel" id="contact-phone" required placeholder="7988456595" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 outline-none focus:border-primary">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-bold text-gray-700 mb-1">Email Address *</label>
+              <input type="email" id="contact-email" required placeholder="you@example.com" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 outline-none focus:border-primary">
+            </div>
+            <div>
+              <label class="block font-bold text-gray-700 mb-1">Inquiry Topic</label>
+              <select id="contact-subject" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 outline-none focus:border-primary font-medium">
+                <option value="custom-3d-print">Custom 3D Printing Quote</option>
+                <option value="shadow-lamp">Personalized 3D Shadow Lamp</option>
+                <option value="iot-project">IoT Prototyping / Hardware Help</option>
+                <option value="order-status">Track Existing Order</option>
+                <option value="influencer-partnership">Influencer / Creator Inquiry</option>
+                <option value="bulk-order">Bulk / Educational Kits Order</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Your Message or Requirements *</label>
+            <textarea id="contact-message" required rows="4" placeholder="Tell us about your project, dimensions, filament preference, or custom names..." class="w-full border border-gray-300 rounded-xl p-3 outline-none focus:border-primary"></textarea>
+          </div>
+
+          <button type="submit" id="contact-submit-btn" class="bg-primary hover:bg-primaryHover text-white font-extrabold text-xs py-3.5 px-8 rounded-2xl shadow-md transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Send Message</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Info Cards (5 cols) -->
+      <div class="lg:col-span-5 space-y-4">
+        
+        <!-- Direct WhatsApp Card -->
+        <div class="bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-3xl p-6 shadow-md flex items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-green-100 block mb-1">Instant Chat Support</span>
+            <h3 class="text-lg font-black leading-tight">Chat Directly on WhatsApp</h3>
+            <p class="text-xs text-green-100 mt-1">+91 7988456595 (Fastest Response)</p>
+          </div>
+          <a href="https://wa.me/917988456595?text=Hi%20Avesh%20Technologies%2C%20I%20have%20an%20inquiry." target="_blank" class="w-12 h-12 rounded-2xl bg-white text-green-600 flex items-center justify-center text-2xl shadow-lg shrink-0 hover:scale-105 transition-transform">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+
+        <!-- Official Info Card -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-4 text-xs">
+          <h3 class="font-black text-sm uppercase tracking-wider text-gray-900 border-b border-gray-100 pb-2">Store Headquarters</h3>
+          
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-orange-100 text-secondary flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <strong class="text-gray-900 block font-bold">Lab &amp; Workshop Address:</strong>
+              <span class="text-gray-500">123 Tech Hub, Electronics Market, New Delhi, India 110001</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-blue-100 text-primary flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div>
+              <strong class="text-gray-900 block font-bold">Calling &amp; WhatsApp Support:</strong>
+              <a href="tel:7988456595" class="text-primary hover:underline font-bold">+91 7988456595</a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <strong class="text-gray-900 block font-bold">Official Email:</strong>
+              <a href="mailto:aveshtech@gmail.com" class="text-primary hover:underline">aveshtech@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center shrink-0">
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+            <div>
+              <strong class="text-gray-900 block font-bold">Official Instagram:</strong>
+              <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="text-pink-600 hover:underline font-bold">@aveshtech.in</a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div>
+              <strong class="text-gray-900 block font-bold">Working Hours:</strong>
+              <span class="text-gray-500">Monday – Saturday: 10:00 AM – 7:00 PM IST</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-6 border-t border-gray-800 text-xs text-gray-400 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <p>&copy; 2026 Avesh Technologies. Official Contact: <strong>7988456595</strong></p>
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram text-base"></i> @aveshtech.in</a>
+        <a href="affiliate.html" class="text-yellow-400 font-bold hover:text-white transition">Influencer Program (10%)</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+
+  <script>
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('contact-submit-btn');
+      btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Sending...</span>`;
+      btn.disabled = true;
+
+      const messageData = {
+        name: document.getElementById('contact-name').value.trim(),
+        phone: document.getElementById('contact-phone').value.trim(),
+        email: document.getElementById('contact-email').value.trim(),
+        subject: document.getElementById('contact-subject').value,
+        message: document.getElementById('contact-message').value.trim()
+      };
+
+      // Persist to Supabase Cloud Database
+      (async () => {
+        try {
+          const sb = await window.waitForSupabase(3500);
+          if (sb && typeof sb.from === 'function') {
+            const { error } = await sb.from('contact_messages').insert([messageData]);
+            if (error) console.warn('[Supabase Contact Error]:', error.message || error);
+          }
+        } catch (err) {
+          console.warn('[Contact Save Warning]:', err);
+        }
+      })();
+
+      // Save directly to unified store inquiries for Admin Panel
+      if (window.AveshStore && typeof window.AveshStore.saveInquiry === 'function') {
+        window.AveshStore.saveInquiry(messageData);
+      }
+
+      if (window.AveshNotifications && typeof window.AveshNotifications.notifyCustomQuoteRequest === 'function') {
+        window.AveshNotifications.notifyCustomQuoteRequest(messageData.name, messageData.phone, messageData.subject, messageData.message);
+      }
+
+      window.showToast('Thank you! Your message has been sent. We will get back to you shortly.');
+      document.getElementById('contact-form').reset();
+      btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Send Message</span>`;
+      btn.disabled = false;
+    }
+  </script>
+</body>
+</html>

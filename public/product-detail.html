@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon with Official Avesh Tech Logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | Avesh Technologies</title>
+  <meta name="description" content="View details, pricing, customization options, and order high quality 3D prints, shadow lamps, and IoT modules at Avesh Tech.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Identity Services (GIS) Sign-In SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!-- Official Razorpay Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <!-- Custom Brand Styling -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            primaryHover: '#1e40af',
+            secondary: '#f97316',
+            secondaryHover: '#ea580c',
+            dark: '#0f172a',
+            gold: '#f59e0b'
+          },
+          fontFamily: {
+            sans: ['Inter', 'Open Sans', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar bg-[#0b2161] text-white text-xs py-2 px-4 border-b border-white/10 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="bg-blue-800 text-yellow-300 font-extrabold text-[9px] uppercase px-2 py-0.5 rounded border border-yellow-300/30">Official Maker Store</span>
+        <span class="text-blue-100">Handcrafted 3D Shadow Lamps, Custom Precision Prints &amp; IoT Prototyping Kits • All-India Express Delivery</span>
+      </div>
+      <div class="hidden md:flex items-center gap-4 text-gray-300 text-[11px]">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-400 transition flex items-center gap-1.5 font-semibold">
+          <i class="fa-brands fa-instagram text-sm"></i> @aveshtech.in
+        </a>
+        <span>|</span>
+        <a href="tel:7988456595" class="hover:text-white transition flex items-center gap-1.5 font-semibold">
+          <i class="fa-solid fa-phone text-xs text-secondary"></i> +91 7988456595
+        </a>
+        <span>|</span>
+        <a href="order-tracking.html" class="hover:text-yellow-300 text-yellow-300 font-bold transition flex items-center gap-1">
+          <i class="fa-solid fa-truck-fast"></i> Track Order
+        </a>
+        <span>|</span>
+        <a href="affiliate.html" class="hover:text-yellow-300 text-yellow-400 font-bold transition flex items-center gap-1">
+          <i class="fa-solid fa-handshake"></i> Influencer Hub (Earn 10%)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header (Clean Royal Blue) -->
+  <header class="bg-[#1d4ed8] text-white sticky top-[28px] z-40 shadow-lg border-b border-blue-600/40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20 group-hover:scale-105 transition">
+        <div class="flex flex-col leading-tight">
+          <span class="text-[10px] tracking-[0.25em] text-blue-200 font-bold uppercase">AVESH TECH</span>
+          <span class="text-xl font-black tracking-tight text-white">Avesh Technologies</span>
+        </div>
+      </a>
+
+      <!-- Quick Nav Links -->
+      <div class="hidden lg:flex items-center gap-5 text-xs font-bold text-blue-100">
+        <a href="products.html" class="hover:text-yellow-400 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-layer-group text-secondary"></i> All
+        </a>
+        <a href="products.html?category=shadow-lamps" class="hover:text-yellow-400 transition flex items-center gap-1.5 text-yellow-300">
+          <i class="fa-solid fa-lightbulb text-yellow-400"></i> Shadow Lamps
+        </a>
+        <a href="products.html?category=3d-prints" class="hover:text-yellow-400 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-print text-orange-400"></i> Custom Prints
+        </a>
+        <a href="products.html?category=3d-models" class="hover:text-yellow-400 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-cube text-cyan-300"></i> 3D Models
+        </a>
+        <a href="products.html?category=iot" class="hover:text-yellow-400 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-wifi text-green-400"></i> IoT Kits
+        </a>
+        <a href="products.html?category=diy-kits" class="hover:text-yellow-400 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-toolbox text-purple-300"></i> DIY Kits
+        </a>
+      </div>
+
+      <!-- Action Utilities -->
+      <div class="flex items-center gap-3 shrink-0">
+        <!-- Creator Affiliate Link -->
+        <a href="affiliate.html" class="hidden sm:flex items-center gap-1.5 text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black px-3 py-2 rounded-xl transition shadow-md">
+          <i class="fa-solid fa-coins text-black"></i>
+          <span>Creator Hub</span>
+        </a>
+
+        <!-- Universal Account / Sign In Button -->
+        <button onclick="window.AveshAuth.openAuthModal()" id="header-auth-btn" class="header-auth-btn group flex items-center gap-2 text-xs font-semibold bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md transition-all duration-200 shadow-sm cursor-pointer active:scale-95" title="Sign In or Register">
+          <div class="w-4 h-4 rounded-full bg-blue-400/30 flex items-center justify-center group-hover:bg-blue-400/50 transition">
+            <i class="fa-regular fa-user text-[10px] text-blue-100"></i>
+          </div>
+          <span id="header-auth-label" class="tracking-wide">Sign In</span>
+        </button>
+
+        <!-- Cart Indicator -->
+        <a href="cart.html" class="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-3.5 py-2 rounded-xl font-bold text-sm shadow-md transition">
+          <div class="relative">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count" class="cart-count absolute -top-2.5 -right-2.5 bg-dark text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-extrabold border border-white hidden">0</span>
+          </div>
+          <span class="cart-header-total hidden sm:inline text-xs">₹0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
+    
+    <!-- Breadcrumb -->
+    <div class="text-xs text-gray-400 mb-6 flex items-center gap-2 flex-wrap">
+      <a href="index.html" class="hover:text-primary transition flex items-center gap-1">
+        <i class="fa-solid fa-house text-[10px]"></i> Home
+      </a>
+      <i class="fa-solid fa-chevron-right text-[9px] text-gray-300"></i>
+      <a href="products.html" class="hover:text-primary transition">Products</a>
+      <i class="fa-solid fa-chevron-right text-[9px] text-gray-300"></i>
+      <span id="detail-category-breadcrumb" class="text-gray-500 font-semibold">Category</span>
+      <i class="fa-solid fa-chevron-right text-[9px] text-gray-300"></i>
+      <span id="detail-title-breadcrumb" class="text-gray-900 font-bold line-clamp-1">Loading...</span>
+    </div>
+
+    <!-- Product Layout Grid -->
+    <div id="product-detail-container" class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 bg-white border border-gray-200 rounded-3xl p-6 sm:p-10 shadow-sm mb-12">
+      <div class="col-span-full py-16 text-center text-gray-400">
+        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-primary mb-3"></i>
+        <p class="text-sm font-medium">Loading product details...</p>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <div class="mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <span class="text-xs font-bold text-secondary uppercase tracking-widest block">Handpicked For You</span>
+          <h3 class="text-xl sm:text-2xl font-black text-gray-900 uppercase tracking-tight">You Might Also Like</h3>
+        </div>
+        <a href="products.html" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+          <span>Explore Full Catalog</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+      <div id="related-products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- QUICK DIRECT BUY MODAL (RAZORPAY INSTANT CHECKOUT) -->
+  <!-- ======================================================== -->
+  <div id="direct-buy-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto space-y-5 animate-scaleIn">
+      
+      <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-orange-100 text-secondary flex items-center justify-center font-bold">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base text-gray-900">Instant Express Checkout</h3>
+            <p class="text-[11px] text-gray-400">Secure Razorpay Payment (UPI, Cards, NetBanking)</p>
+          </div>
+        </div>
+        <button onclick="closeDirectBuyModal()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Item Preview Summary -->
+      <div class="flex items-center gap-3 bg-gray-50 p-3.5 rounded-2xl border border-gray-100">
+        <img id="buy-modal-item-img" src="" alt="Product" class="w-14 h-14 object-cover rounded-xl border border-gray-200 shrink-0 bg-white">
+        <div class="flex-1 min-w-0">
+          <h4 id="buy-modal-item-name" class="font-bold text-xs text-gray-900 truncate"></h4>
+          <div class="text-[11px] text-gray-500 mt-0.5">
+            Quantity: <span id="buy-modal-item-qty" class="font-bold text-gray-900">1</span> • 
+            <span id="buy-modal-item-price" class="font-bold text-primary">₹0</span> each
+          </div>
+          <div id="buy-modal-custom-preview" class="text-[10px] text-orange-600 font-semibold truncate mt-0.5 hidden"></div>
+        </div>
+      </div>
+
+      <!-- Customer Delivery Form -->
+      <form id="direct-buy-form" onsubmit="executeDirectBuyRazorpay(event)" class="space-y-3.5 text-xs">
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Full Name *</label>
+          <input type="text" id="buy-cust-name" required placeholder="Enter your full name" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs outline-none focus:border-primary">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">WhatsApp / Phone Number *</label>
+            <input type="tel" id="buy-cust-phone" required pattern="[0-9]{10}" placeholder="10-digit number" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs outline-none focus:border-primary">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Email Address</label>
+            <input type="email" id="buy-cust-email" placeholder="For order invoice" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs outline-none focus:border-primary">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Delivery Address (House/Flat, Street, Area) *</label>
+          <input type="text" id="buy-cust-address" required placeholder="Complete shipping address" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs outline-none focus:border-primary">
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 sm:gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">City *</label>
+            <input type="text" id="buy-cust-city" required placeholder="City" class="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-xs outline-none focus:border-primary">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">State *</label>
+            <input type="text" id="buy-cust-state" required placeholder="State" class="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-xs outline-none focus:border-primary">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Pincode *</label>
+            <input type="text" id="buy-cust-pin" required pattern="[0-9]{6}" placeholder="PIN" class="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-xs outline-none focus:border-primary">
+          </div>
+        </div>
+
+        <!-- Creator Referral Code inside Buy Modal -->
+        <div class="bg-amber-50/80 border border-amber-200 p-3 rounded-2xl space-y-2 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-amber-950 flex items-center gap-1.5">
+              <i class="fa-solid fa-gift text-amber-600"></i> Have a Creator Referral Code?
+            </span>
+            <span class="text-[10px] font-black text-amber-800 bg-amber-200/80 px-2 py-0.5 rounded uppercase">10% Discount</span>
+          </div>
+          <div class="flex gap-2">
+            <input type="text" id="buy-modal-ref-input" placeholder="Enter referral code" class="w-full bg-white border border-amber-300 rounded-xl px-3 py-2 text-xs font-mono font-bold uppercase outline-none focus:border-amber-500">
+            <button type="button" onclick="applyReferralInModal()" class="bg-amber-500 hover:bg-amber-600 text-black font-extrabold text-xs px-4 py-2 rounded-xl transition cursor-pointer whitespace-nowrap">
+              Apply
+            </button>
+          </div>
+          <div id="buy-modal-ref-feedback" class="hidden text-[11px] font-semibold"></div>
+        </div>
+
+        <!-- Total Price Breakdown -->
+        <div class="bg-blue-50 border border-blue-200/60 p-3.5 rounded-2xl space-y-1.5 text-xs">
+          <div class="flex justify-between text-gray-600">
+            <span>Item Subtotal:</span>
+            <span id="buy-modal-subtotal" class="font-bold text-gray-900">₹0</span>
+          </div>
+          <div id="buy-modal-ref-row" class="hidden justify-between text-green-700 font-bold">
+            <span id="buy-modal-ref-label">Creator Referral Discount (10%):</span>
+            <span id="buy-modal-ref-discount">-₹0</span>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <span>Shipping:</span>
+            <span id="buy-modal-shipping" class="font-bold text-green-600">FREE</span>
+          </div>
+          <div class="flex justify-between text-sm font-black text-gray-900 border-t border-blue-200/60 pt-1.5">
+            <span>Total Payable:</span>
+            <span id="buy-modal-grandtotal" class="text-primary text-base">₹0</span>
+          </div>
+        </div>
+
+        <!-- Pay Button -->
+        <div class="pt-2">
+          <button type="submit" id="buy-modal-submit-btn" class="w-full bg-gradient-to-r from-amber-500 via-orange-600 to-amber-600 hover:from-amber-600 hover:to-orange-700 text-white font-extrabold text-sm py-3.5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-lock text-xs"></i>
+            <span id="buy-modal-btn-label">Pay with Razorpay / UPI</span>
+          </button>
+        </div>
+
+        <p class="text-center text-[10px] text-gray-400">
+          🔒 256-Bit SSL Encrypted Payment via Razorpay. 100% Buyer Protection.
+        </p>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- ORDER SUCCESS RECEIPT MODAL -->
+  <!-- ======================================================== -->
+  <div id="order-success-modal" class="fixed inset-0 bg-black/75 z-50 flex items-center justify-center p-4 hidden backdrop-blur-md">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl text-center space-y-4 border border-gray-100 animate-scaleIn">
+      <div class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-2xl mx-auto shadow-inner">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <div>
+        <span class="text-[10px] bg-green-100 text-green-700 font-bold uppercase px-3 py-1 rounded-full">Payment Confirmed</span>
+        <h2 class="text-2xl font-black text-gray-900 mt-2">Thank You For Your Order!</h2>
+        <p class="text-xs text-gray-500 mt-1">Your order has been recorded and scheduled for production in our maker workshop.</p>
+      </div>
+
+      <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4 text-xs text-left space-y-2">
+        <div class="flex justify-between">
+          <span class="text-gray-500">Order ID:</span>
+          <span id="success-order-id" class="font-mono font-bold text-gray-900"></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500">Total Paid:</span>
+          <span id="success-order-total" class="font-black text-primary"></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500">Payment Status:</span>
+          <span id="success-payment-status" class="font-bold text-green-600">PAID (RAZORPAY)</span>
+        </div>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <button id="success-whatsapp-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-xs py-3 rounded-xl transition shadow flex items-center justify-center gap-2 cursor-pointer">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>Track &amp; Confirm on WhatsApp</span>
+        </button>
+        <button onclick="window.location.href = 'products.html'" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs py-2.5 rounded-xl transition cursor-pointer">
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-8 border-t border-gray-800 text-xs text-gray-400 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="Avesh Technologies" class="w-8 h-8 rounded-lg bg-[#002f87] p-1 border border-white/20">
+        <div>
+          <p class="font-bold text-white text-sm">Avesh Technologies</p>
+          <p class="text-[11px] text-gray-500">Official Store • New Delhi, India • Phone: <strong>7988456595</strong></p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram text-base"></i> @aveshtech.in</a>
+        <a href="affiliate.html" class="text-yellow-400 font-bold hover:text-white transition">Influencer Program (10%)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Contact Buttons -->
+  <a href="https://wa.me/917988456595" target="_blank" class="floating-whatsapp" title="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="floating-social" title="Follow on Instagram">
+    <i class="fa-brands fa-instagram text-lg"></i>
+    <span>Follow @aveshtech.in</span>
+  </a>
+
+  <!-- Core Scripts -->
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+
+  <!-- Product Detail & Razorpay Logic -->
+  <script>
+    let activeProduct = null;
+    let selectedQty = 1;
+
+    // ----------------------------------------------------
+    // Load Product Detail (Instant 0ms synchronous execution)
+    // ----------------------------------------------------
+    function loadProductDetail() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('slug') || urlParams.get('id');
+
+      if (!slug) {
+        window.location.href = 'products.html';
+        return;
+      }
+
+      // 1. Instant Synchronous Lookup (Zero latency)
+      if (window.AveshStore && typeof window.AveshStore.getProductBySlugSync === 'function') {
+        activeProduct = window.AveshStore.getProductBySlugSync(slug);
+      }
+
+      if (activeProduct) {
+        renderProductDetailView();
+        const buyNowParam = urlParams.get('buy');
+        if (buyNowParam === 'now' || buyNowParam === 'true') {
+          setTimeout(openDirectBuyModal, 250);
+        }
+        return;
+      }
+
+      // 2. Fallback to Async Search if needed
+      if (window.AveshStore && typeof window.AveshStore.getProductBySlug === 'function') {
+        window.AveshStore.getProductBySlug(slug).then(prod => {
+          if (prod) {
+            activeProduct = prod;
+            renderProductDetailView();
+            const buyNowParam = urlParams.get('buy');
+            if (buyNowParam === 'now' || buyNowParam === 'true') {
+              setTimeout(openDirectBuyModal, 250);
+            }
+          } else {
+            renderNotFoundView();
+          }
+        }).catch(() => renderNotFoundView());
+      } else {
+        renderNotFoundView();
+      }
+    }
+
+    function renderNotFoundView() {
+      const container = document.getElementById('product-detail-container');
+      if (!container) return;
+      container.innerHTML = `
+        <div class="col-span-full py-16 text-center text-gray-400">
+          <i class="fa-solid fa-triangle-exclamation text-4xl text-amber-500 mb-3"></i>
+          <h2 class="text-xl font-bold text-gray-800 mb-2">Product Not Found</h2>
+          <p class="text-xs text-gray-500 mb-6">This item might be unavailable or removed from our catalog.</p>
+          <a href="products.html" class="bg-primary hover:bg-primaryHover text-white text-xs font-bold px-6 py-2.5 rounded-xl shadow transition">
+            Explore All Products
+          </a>
+        </div>
+      `;
+    }
+
+    function renderProductDetailView() {
+      const container = document.getElementById('product-detail-container');
+      if (!container || !activeProduct) return;
+
+      // Update Page Meta & Breadcrumbs
+      document.title = `${activeProduct.name} | Avesh Technologies`;
+      const catBreadcrumb = document.getElementById('detail-category-breadcrumb');
+      const titleBreadcrumb = document.getElementById('detail-title-breadcrumb');
+      if (catBreadcrumb) catBreadcrumb.textContent = activeProduct.category_name || activeProduct.category;
+      if (titleBreadcrumb) titleBreadcrumb.textContent = activeProduct.name;
+
+      if (window.AveshNotifications && typeof window.AveshNotifications.notifyProductView === 'function') {
+        window.AveshNotifications.notifyProductView(activeProduct.name, activeProduct.price);
+      }
+
+      const images = Array.isArray(activeProduct.images) && activeProduct.images.length > 0
+        ? activeProduct.images
+        : [activeProduct.image || 'assets/products/item-1.jpeg'];
+
+      const discount = activeProduct.mrp && activeProduct.mrp > activeProduct.price
+        ? Math.round((1 - activeProduct.price / activeProduct.mrp) * 100)
+        : 0;
+
+      container.innerHTML = `
+        <!-- Left: Image Gallery (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="aspect-square rounded-3xl overflow-hidden bg-gray-900 border border-gray-200 shadow-lg relative group">
+            <img id="main-product-img" src="${images[0]}" alt="${window.escapeHTML(activeProduct.name)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            ${activeProduct.badge ? `<span class="absolute top-3 left-3 bg-secondary text-white text-[11px] font-black uppercase px-3 py-1 rounded-full shadow-md tracking-wider">${window.escapeHTML(activeProduct.badge)}</span>` : ''}
+            ${discount > 0 ? `<span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-extrabold px-2.5 py-0.5 rounded-lg shadow-md">${discount}% OFF</span>` : ''}
+          </div>
+          
+          ${images.length > 1 ? `
+            <div class="flex gap-2.5 overflow-x-auto pb-1">
+              ${images.map((img, i) => `
+                <button onclick="document.getElementById('main-product-img').src = '${img}'" class="w-16 h-16 rounded-xl overflow-hidden border-2 border-transparent hover:border-primary transition shrink-0 bg-gray-100 cursor-pointer shadow-sm">
+                  <img src="${img}" class="w-full h-full object-cover">
+                </button>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          <!-- Workshop Quality Tags -->
+          <div class="grid grid-cols-2 gap-2 pt-2 text-[11px]">
+            <div class="flex items-center gap-2 p-2.5 bg-gray-50 border border-gray-100 rounded-xl">
+              <i class="fa-solid fa-cube text-primary"></i>
+              <span class="text-gray-600">Material: <strong class="text-gray-900">${activeProduct.category === 'shadow-lamps' ? 'Solid Wood + Acrylic' : 'PLA+ / PETG / Resin'}</strong></span>
+            </div>
+            <div class="flex items-center gap-2 p-2.5 bg-gray-50 border border-gray-100 rounded-xl">
+              <i class="fa-solid fa-bolt text-amber-500"></i>
+              <span class="text-gray-600">Testing: <strong class="text-gray-900">100% Tested</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Information & Ordering (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <span class="text-xs font-extrabold text-secondary uppercase tracking-widest block mb-1">
+              ${window.escapeHTML(activeProduct.category_name || activeProduct.category)}
+            </span>
+            <h1 class="text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
+              ${window.escapeHTML(activeProduct.name)}
+            </h1>
+            
+            <div class="flex items-center gap-3 mt-2 text-xs">
+              <div class="flex items-center gap-1 text-yellow-500">
+                <i class="fa-solid fa-star"></i>
+                <span class="font-extrabold text-gray-900 text-sm">${activeProduct.rating || 4.9}</span>
+              </div>
+              <span class="text-gray-300">|</span>
+              <span class="text-gray-500">${activeProduct.reviews_count || 38} verified maker reviews</span>
+              <span class="text-gray-300">|</span>
+              <span class="text-green-600 font-bold flex items-center gap-1">
+                <i class="fa-solid fa-circle-check"></i> ${activeProduct.stock_status || 'In Stock (Handcrafted)'}
+              </span>
+            </div>
+          </div>
+
+          <!-- Price Display -->
+          <div class="flex items-baseline gap-3 p-4 bg-gradient-to-r from-blue-50 to-indigo-50/40 rounded-2xl border border-blue-100">
+            <span class="text-3xl sm:text-4xl font-black text-gray-900">${window.formatINR(activeProduct.price)}</span>
+            ${activeProduct.mrp && activeProduct.mrp > activeProduct.price ? `
+              <span class="text-sm text-gray-400 line-through">${window.formatINR(activeProduct.mrp)}</span>
+              <span class="text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded-md">${discount}% SAVINGS</span>
+            ` : ''}
+            <span class="text-[11px] text-gray-500 ml-auto hidden sm:inline">Inclusive of all taxes</span>
+          </div>
+
+          <!-- Description -->
+          <div class="text-xs sm:text-sm text-gray-600 leading-relaxed space-y-2">
+            <p>${window.escapeHTML(activeProduct.description || activeProduct.short_description)}</p>
+          </div>
+
+          <!-- Custom Instructions Input (Always available for personalization or instructions) -->
+          <div class="p-4 bg-orange-50/80 border border-orange-200 rounded-2xl space-y-1.5 text-xs">
+            <label class="block font-bold text-orange-950">
+              <i class="fa-solid fa-wand-magic-sparkles mr-1 text-secondary"></i> Custom Names / Photo / Print Inscription (Optional):
+            </label>
+            <input type="text" id="product-custom-text" placeholder="e.g. Inscribe names 'Rohit & Pooja', preferred LED color, or note" class="w-full border border-orange-300 bg-white rounded-xl px-3.5 py-2.5 outline-none focus:border-secondary">
+            <p class="text-[10px] text-orange-800">For custom photos on lithophane or lamps, you can also send images directly to our WhatsApp after checkout.</p>
+          </div>
+
+          <!-- Digital Model Link if Applicable -->
+          ${activeProduct.model_file_url ? `
+            <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-2xl flex items-center justify-between text-xs text-blue-900">
+              <span class="flex items-center gap-2 font-bold">
+                <i class="fa-solid fa-file-arrow-down text-primary text-lg"></i> Digital STL 3D Model File Bundle
+              </span>
+              <span class="text-[10px] bg-blue-600 text-white font-bold px-2.5 py-0.5 rounded-full">Instant Digital Delivery</span>
+            </div>
+          ` : ''}
+
+          <!-- Quantity Selector -->
+          <div class="flex items-center gap-3 pt-1">
+            <span class="text-xs font-bold text-gray-700">Quantity:</span>
+            <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden bg-white shadow-sm">
+              <button onclick="changeQty(-1)" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:bg-gray-100 font-bold transition cursor-pointer">-</button>
+              <span id="qty-val" class="w-10 text-center text-xs font-bold text-gray-900">1</span>
+              <button onclick="changeQty(1)" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:bg-gray-100 font-bold transition cursor-pointer">+</button>
+            </div>
+            <span class="text-[11px] text-gray-400">Total: <strong id="dynamic-item-total" class="text-gray-900">${window.formatINR(activeProduct.price)}</strong></span>
+          </div>
+
+          <!-- Creator Referral Code (10% Discount) -->
+          <div class="p-3.5 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl space-y-2 text-xs shadow-sm">
+            <div class="flex items-center justify-between">
+              <label class="font-bold text-amber-950 flex items-center gap-1.5">
+                <i class="fa-solid fa-tags text-secondary"></i> Have a Creator Referral Code?
+              </label>
+              <span class="text-[10px] font-black text-amber-800 bg-amber-200/80 px-2 py-0.5 rounded-full uppercase">10% OFF</span>
+            </div>
+            <div class="flex gap-2">
+              <input type="text" id="page-referral-input" placeholder="Enter creator code" class="w-full bg-white border border-amber-300 rounded-xl px-3.5 py-2 text-xs font-mono font-bold uppercase outline-none focus:border-secondary">
+              <button type="button" onclick="applyReferralOnProductPage()" class="bg-secondary hover:bg-secondaryHover text-white font-extrabold text-xs px-4 py-2 rounded-xl transition shadow-sm cursor-pointer whitespace-nowrap">
+                Apply Code
+              </button>
+            </div>
+            <div id="page-referral-msg" class="hidden text-[11px] font-bold p-2 rounded-xl"></div>
+          </div>
+
+          <!-- PRIMARY ACTION BUTTONS (DIRECT BUY + ADD TO CART + WHATSAPP) -->
+          <div class="space-y-3 pt-2">
+            <!-- 1. BUY NOW WITH RAZORPAY (Direct 1-Click Checkout) -->
+            <button onclick="openDirectBuyModal()" class="w-full bg-gradient-to-r from-amber-500 via-orange-600 to-amber-600 hover:from-amber-600 hover:to-orange-700 text-white font-black text-sm py-4 px-6 rounded-2xl shadow-xl transition flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5">
+              <i class="fa-solid fa-bolt text-yellow-300"></i>
+              <span>⚡ Buy Now with Razorpay (UPI / Card / NetBanking)</span>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <!-- 2. ADD TO CART -->
+              <button onclick="addProductToCart()" class="bg-primary hover:bg-primaryHover text-white font-extrabold text-xs py-3.5 px-6 rounded-2xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Add to Cart</span>
+              </button>
+
+              <!-- 3. ORDER VIA WHATSAPP -->
+              <button onclick="orderDirectWhatsApp()" class="bg-green-600 hover:bg-green-700 text-white font-extrabold text-xs py-3.5 px-6 rounded-2xl shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Order via WhatsApp</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Maker Guarantees -->
+          <div class="grid grid-cols-3 gap-3 pt-4 border-t border-gray-100 text-center text-[11px] text-gray-500">
+            <div class="p-2 bg-gray-50 rounded-xl border border-gray-100">
+              <i class="fa-solid fa-truck-fast text-secondary text-base mb-1 block"></i>
+              <span class="font-semibold text-gray-700">All-India Courier</span>
+            </div>
+            <div class="p-2 bg-gray-50 rounded-xl border border-gray-100">
+              <i class="fa-solid fa-shield-halved text-green-600 text-base mb-1 block"></i>
+              <span class="font-semibold text-gray-700">Quality Checked</span>
+            </div>
+            <div class="p-2 bg-gray-50 rounded-xl border border-gray-100">
+              <i class="fa-solid fa-headset text-primary text-base mb-1 block"></i>
+              <span class="font-semibold text-gray-700">Direct Support</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      loadRelatedSync(activeProduct.category, activeProduct.id);
+    }
+
+    function changeQty(delta) {
+      selectedQty = Math.max(1, selectedQty + delta);
+      const qtyEl = document.getElementById('qty-val');
+      const totalEl = document.getElementById('dynamic-item-total');
+      if (qtyEl) qtyEl.textContent = selectedQty;
+      if (totalEl && activeProduct) totalEl.textContent = window.formatINR(activeProduct.price * selectedQty);
+    }
+
+    // ----------------------------------------------------
+    // Action 1: Add to Cart
+    // ----------------------------------------------------
+    function addProductToCart() {
+      if (!activeProduct) return;
+      const note = document.getElementById('product-custom-text')?.value.trim() || '';
+      window.AveshStore.addToCart(activeProduct, selectedQty, note);
+      if (window.showToast) {
+        window.showToast(`Added ${selectedQty}x "${activeProduct.name}" to cart!`, 'success');
+      }
+    }
+
+    // ----------------------------------------------------
+    // Referral Code Management on Product & Modal
+    // ----------------------------------------------------
+    let activeReferral = (window.AveshStore && window.AveshStore.getActiveReferral) ? window.AveshStore.getActiveReferral() : '';
+
+    function getReferralDiscount(subtotal) {
+      if (!activeReferral) return 0;
+      return Math.round(subtotal * 0.10);
+    }
+
+    window.applyReferralOnProductPage = function() {
+      const input = document.getElementById('page-referral-input');
+      const msgEl = document.getElementById('page-referral-msg');
+      if (!input || !msgEl) return;
+      const code = input.value.trim();
+      if (!code) {
+        msgEl.className = 'text-[11px] font-bold p-2 rounded-xl text-red-600 bg-red-50 border border-red-200 block';
+        msgEl.textContent = 'Please enter a creator code';
+        return;
+      }
+      const res = window.AveshStore.validateReferralCodeSync(code);
+      if (res.valid) {
+        activeReferral = res.code;
+        window.AveshStore.applyReferralCode(res.code);
+        msgEl.className = 'text-[11px] font-bold p-2 rounded-xl text-green-700 bg-green-50 border border-green-200 block';
+        msgEl.innerHTML = `<i class="fa-solid fa-check-circle text-green-600 mr-1"></i> Creator Code <strong>${res.code}</strong> Applied! 10% Discount added. Commission will be credited to ${res.creator_name} (${res.instagram}).`;
+        updateProductTotalsUI();
+      } else {
+        msgEl.className = 'text-[11px] font-bold p-2 rounded-xl text-red-600 bg-red-50 border border-red-200 block';
+        msgEl.textContent = res.message || 'Invalid creator referral code.';
+      }
+    };
+
+    window.applyReferralInModal = function() {
+      const input = document.getElementById('buy-modal-ref-input');
+      const msgEl = document.getElementById('buy-modal-ref-feedback');
+      if (!input || !msgEl) return;
+      const code = input.value.trim();
+      if (!code) {
+        msgEl.className = 'text-[11px] font-bold text-red-600 block';
+        msgEl.textContent = 'Please enter a code.';
+        return;
+      }
+      const res = window.AveshStore.validateReferralCodeSync(code);
+      if (res.valid) {
+        activeReferral = res.code;
+        window.AveshStore.applyReferralCode(res.code);
+        msgEl.className = 'text-[11px] font-bold text-green-700 block';
+        msgEl.innerHTML = `✓ Code <strong>${res.code}</strong> applied! 10% Discount active.`;
+        updateModalPricing();
+      } else {
+        msgEl.className = 'text-[11px] font-bold text-red-600 block';
+        msgEl.textContent = res.message || 'Invalid code.';
+      }
+    };
+
+    function updateProductTotalsUI() {
+      if (!activeProduct) return;
+      const subtotal = activeProduct.price * selectedQty;
+      const refDiscount = getReferralDiscount(subtotal);
+      const totalEl = document.getElementById('dynamic-item-total');
+      if (totalEl) {
+        if (refDiscount > 0) {
+          totalEl.innerHTML = `<span class="line-through text-gray-400 mr-1.5">${window.formatINR(subtotal)}</span> <span class="text-green-600 font-extrabold">${window.formatINR(subtotal - refDiscount)}</span> <span class="text-[10px] text-green-700 bg-green-100 px-1.5 py-0.5 rounded font-black">10% OFF</span>`;
+        } else {
+          totalEl.textContent = window.formatINR(subtotal);
+        }
+      }
+    }
+
+    function updateModalPricing() {
+      if (!activeProduct) return;
+      const subtotal = activeProduct.price * selectedQty;
+      const refDiscount = getReferralDiscount(subtotal);
+      const discountedSubtotal = Math.max(0, subtotal - refDiscount);
+      const shipping = discountedSubtotal >= (window.AVESH_CONFIG.freeShippingThreshold || 999) ? 0 : (window.AVESH_CONFIG.standardShippingFee || 79);
+      const grandTotal = discountedSubtotal + shipping;
+
+      document.getElementById('buy-modal-subtotal').textContent = window.formatINR(subtotal);
+      const refRow = document.getElementById('buy-modal-ref-row');
+      if (refDiscount > 0) {
+        refRow.classList.remove('hidden');
+        refRow.classList.add('flex');
+        document.getElementById('buy-modal-ref-label').textContent = `Creator Discount (${activeReferral.toUpperCase()} - 10%):`;
+        document.getElementById('buy-modal-ref-discount').textContent = '-' + window.formatINR(refDiscount);
+      } else {
+        refRow.classList.add('hidden');
+        refRow.classList.remove('flex');
+      }
+
+      document.getElementById('buy-modal-shipping').textContent = shipping === 0 ? 'FREE' : window.formatINR(shipping);
+      document.getElementById('buy-modal-grandtotal').textContent = window.formatINR(grandTotal);
+      document.getElementById('buy-modal-btn-label').textContent = `Pay ${window.formatINR(grandTotal)} via Razorpay`;
+    }
+
+    // ----------------------------------------------------
+    // Action 2: Direct Razorpay Checkout Modal Flow
+    // ----------------------------------------------------
+    function openDirectBuyModal() {
+      if (!activeProduct) return;
+      const modal = document.getElementById('direct-buy-modal');
+      const note = document.getElementById('product-custom-text')?.value.trim() || '';
+
+      // Populate Modal Preview
+      const img = Array.isArray(activeProduct.images) && activeProduct.images[0] ? activeProduct.images[0] : (activeProduct.image || '');
+      document.getElementById('buy-modal-item-img').src = img;
+      document.getElementById('buy-modal-item-name').textContent = activeProduct.name;
+      document.getElementById('buy-modal-item-qty').textContent = selectedQty;
+      document.getElementById('buy-modal-item-price').textContent = window.formatINR(activeProduct.price);
+
+      // Pre-fill referral code input if already active
+      const refInput = document.getElementById('buy-modal-ref-input');
+      if (refInput && activeReferral) {
+        refInput.value = activeReferral.toUpperCase();
+        document.getElementById('buy-modal-ref-feedback').className = 'text-[11px] font-bold text-green-700 block';
+        document.getElementById('buy-modal-ref-feedback').innerHTML = `✓ Code <strong>${activeReferral.toUpperCase()}</strong> active.`;
+      }
+
+      updateModalPricing();
+
+      const customPreviewEl = document.getElementById('buy-modal-custom-preview');
+      if (note) {
+        customPreviewEl.textContent = `Custom Inscription: "${note}"`;
+        customPreviewEl.classList.remove('hidden');
+      } else {
+        customPreviewEl.classList.add('hidden');
+      }
+
+      // Pre-fill user details if logged in
+      if (window.AveshAuth && typeof window.AveshAuth.getCurrentUser === 'function') {
+        const u = window.AveshAuth.getCurrentUser();
+        if (u) {
+          if (u.name && !document.getElementById('buy-cust-name').value) document.getElementById('buy-cust-name').value = u.name;
+          if (u.phone && !document.getElementById('buy-cust-phone').value) document.getElementById('buy-cust-phone').value = u.phone;
+          if (u.email && !document.getElementById('buy-cust-email').value) document.getElementById('buy-cust-email').value = u.email;
+        }
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeDirectBuyModal() {
+      document.getElementById('direct-buy-modal')?.classList.add('hidden');
+    }
+
+    async function executeDirectBuyRazorpay(e) {
+      e.preventDefault();
+      if (!activeProduct) return;
+
+      const name = document.getElementById('buy-cust-name').value.trim();
+      const phone = document.getElementById('buy-cust-phone').value.trim();
+      const email = document.getElementById('buy-cust-email').value.trim() || 'aveshtech@gmail.com';
+      const address = document.getElementById('buy-cust-address').value.trim();
+      const city = document.getElementById('buy-cust-city').value.trim();
+      const state = document.getElementById('buy-cust-state').value.trim();
+      const pin = document.getElementById('buy-cust-pin').value.trim();
+      const customNote = document.getElementById('product-custom-text')?.value.trim() || '';
+
+      const subtotal = activeProduct.price * selectedQty;
+      const refDiscount = getReferralDiscount(subtotal);
+      const discountedSubtotal = Math.max(0, subtotal - refDiscount);
+      const shipping = discountedSubtotal >= (window.AVESH_CONFIG.freeShippingThreshold || 999) ? 0 : (window.AVESH_CONFIG.standardShippingFee || 79);
+      const grandTotal = discountedSubtotal + shipping;
+
+      const orderData = {
+        customer_name: name,
+        phone: phone,
+        email: email,
+        shipping_address: {
+          address: address,
+          city: city,
+          state: state,
+          pincode: pin
+        },
+        items: [{
+          id: activeProduct.id,
+          name: activeProduct.name,
+          slug: activeProduct.slug,
+          price: activeProduct.price,
+          quantity: selectedQty,
+          customNote: customNote,
+          image: Array.isArray(activeProduct.images) ? activeProduct.images[0] : activeProduct.image
+        }],
+        subtotal: subtotal,
+        shipping_fee: shipping,
+        discount: refDiscount,
+        coupon_discount: refDiscount,
+        referral_code: activeReferral ? activeReferral.toUpperCase() : '',
+        total: grandTotal,
+        payment_method: 'razorpay',
+        payment_status: 'pending',
+        order_status: 'confirmed'
+      };
+
+      closeDirectBuyModal();
+
+      // Launch Razorpay
+      window.AveshStore.initRazorpayPayment(
+        orderData,
+        // On Success:
+        async function(paymentId) {
+          orderData.payment_status = 'paid';
+          orderData.razorpay_payment_id = paymentId;
+          const created = await window.AveshStore.createOrder(orderData);
+          showOrderSuccessModal(created);
+        },
+        // On Dismiss:
+        function() {
+          if (window.showToast) window.showToast('Payment window dismissed.', 'info');
+        }
+      );
+    }
+
+    function showOrderSuccessModal(order) {
+      const modal = document.getElementById('order-success-modal');
+      if (!modal) return;
+      document.getElementById('success-order-id').textContent = order.id;
+      document.getElementById('success-order-total').textContent = window.formatINR(order.total);
+      document.getElementById('success-payment-status').textContent = `${order.payment_method.toUpperCase()} • ${order.payment_status.toUpperCase()}`;
+
+      document.getElementById('success-whatsapp-btn').onclick = function() {
+        window.AveshStore.sendWhatsAppOrder(order);
+      };
+
+      modal.classList.remove('hidden');
+    }
+
+    // ----------------------------------------------------
+    // Action 3: Direct WhatsApp Ordering
+    // ----------------------------------------------------
+    function orderDirectWhatsApp() {
+      if (!activeProduct) return;
+      const note = document.getElementById('product-custom-text')?.value.trim() || '';
+      const subtotal = activeProduct.price * selectedQty;
+      const refDiscount = getReferralDiscount(subtotal);
+      const grandTotal = Math.max(0, subtotal - refDiscount);
+      
+      const message = 
+`*NEW ORDER INQUIRY - AVESH TECHNOLOGIES* 🛍️
+*Product:* ${activeProduct.name}
+*Quantity:* ${selectedQty}
+*Unit Price:* ₹${activeProduct.price}
+${refDiscount > 0 ? `*Subtotal:* ₹${subtotal}\n*Creator Referral Code:* ${activeReferral.toUpperCase()} (10% Discount: -₹${refDiscount})\n*Final Payable:* ₹${grandTotal}` : `*Total Payable:* ₹${subtotal}`}
+${note ? `*Custom Inscription:* ${note}\n` : ''}*Link:* ${window.location.href}
+
+Please confirm order details and dispatch timeline!`;
+
+      const url = `https://wa.me/${window.AVESH_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+
+    // ----------------------------------------------------
+    // Related Products (Instant Synchronous Render)
+    // ----------------------------------------------------
+    function loadRelatedSync(category, currentId) {
+      const container = document.getElementById('related-products-grid');
+      if (!container || !window.AveshStore || !window.AveshStore.getProductsSync) return;
+
+      const all = window.AveshStore.getProductsSync();
+      const related = all.filter(p => p.id !== currentId && p.category === category).slice(0, 4);
+
+      if (related.length === 0) {
+        // Fallback to other featured
+        const fallback = all.filter(p => p.id !== currentId).slice(0, 4);
+        renderRelatedCards(fallback);
+      } else {
+        renderRelatedCards(related);
+      }
+    }
+
+    function renderRelatedCards(items) {
+      const container = document.getElementById('related-products-grid');
+      if (!container) return;
+
+      container.innerHTML = items.map(p => {
+        const img = Array.isArray(p.images) && p.images[0] ? p.images[0] : (p.image || '');
+        return `
+          <div class="product-card bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <a href="product-detail.html?slug=${p.slug}" class="block aspect-square overflow-hidden bg-gray-100 group">
+              <img src="${img}" alt="${window.escapeHTML(p.name)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            </a>
+            <div class="p-3.5 flex-1 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] font-bold text-secondary uppercase">${window.escapeHTML(p.category_name || p.category)}</span>
+                <a href="product-detail.html?slug=${p.slug}">
+                  <h4 class="font-bold text-xs text-gray-900 hover:text-primary transition line-clamp-1 mt-0.5">${window.escapeHTML(p.name)}</h4>
+                </a>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-100">
+                <span class="font-black text-sm text-gray-900">${window.formatINR(p.price)}</span>
+                <a href="product-detail.html?slug=${p.slug}" class="text-xs text-primary font-bold hover:underline flex items-center gap-1">
+                  <span>View</span>
+                  <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Run Immediately on Load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadProductDetail);
+    } else {
+      loadProductDetail();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon with Official Avesh Tech Logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Order Tracking | Avesh Technologies</title>
+  <meta name="description" content="Track your custom 3D shadow lamps, prints, and IoT kit orders live with courier AWB tracking.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            primaryHover: '#1e40af',
+            secondary: '#f97316',
+            secondaryHover: '#ea580c',
+            dark: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#1d4ed8] text-white border-b border-blue-600/40 sticky top-0 z-40 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20">
+        <div class="flex flex-col leading-tight">
+          <span class="text-[10px] tracking-[0.25em] text-blue-200 font-bold uppercase">ORDER TRACKING</span>
+          <span class="text-xl font-black text-white">Avesh Technologies</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a href="products.html" class="text-xs text-blue-100 hover:text-white px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 transition">Catalog</a>
+        <a href="cart.html" class="text-xs bg-secondary hover:bg-secondaryHover text-white px-3.5 py-1.5 rounded-xl font-bold transition flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Cart</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full space-y-8">
+
+    <!-- Search Hero Bar -->
+    <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-blue-800 text-center space-y-4">
+      <div class="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 text-yellow-300 text-3xl flex items-center justify-center mx-auto shadow-inner">
+        <i class="fa-solid fa-truck-fast"></i>
+      </div>
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Track Your Maker Order Live</h1>
+        <p class="text-xs sm:text-sm text-blue-200 max-w-md mx-auto mt-1">
+          Enter your <strong>Order ID</strong> (e.g. ORD-719284) or your <strong>10-digit WhatsApp Mobile Number</strong> to see real-time 3D printing &amp; courier delivery status.
+        </p>
+      </div>
+
+      <!-- Search Input Form -->
+      <form onsubmit="handleTrackSearch(event)" class="max-w-md mx-auto flex gap-2 bg-white/10 p-2 rounded-2xl border border-white/20">
+        <input type="text" id="track-query-input" required placeholder="e.g. ORD-719284 or 9811223344" class="w-full bg-transparent px-3 py-2 text-sm text-white placeholder-blue-300 outline-none font-bold uppercase tracking-wider">
+        <button type="submit" class="bg-secondary hover:bg-secondaryHover text-white px-5 py-2.5 rounded-xl font-bold text-xs transition shrink-0 shadow flex items-center gap-1.5">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Track</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Result Display Container -->
+    <div id="tracking-result-box" class="space-y-6">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Need Help Card -->
+    <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="space-y-1 text-center sm:text-left">
+        <h4 class="font-black text-gray-900 text-sm flex items-center justify-center sm:justify-start gap-2">
+          <i class="fa-solid fa-headset text-primary"></i> Need urgent update or delivery rescheduling?
+        </h4>
+        <p class="text-xs text-gray-500">Contact our maker workshop directly on WhatsApp. We respond within minutes.</p>
+      </div>
+      <a href="https://wa.me/917988456595?text=Hello%20Avesh%20Technologies,%20I%20need%20assistance%20tracking%20my%20order." target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-extrabold text-xs px-5 py-3 rounded-2xl shadow transition flex items-center gap-2 shrink-0">
+        <i class="fa-brands fa-whatsapp text-sm"></i>
+        <span>Chat with Maker Support</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-6 border-t border-gray-800 text-xs text-gray-400 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p>&copy; 2026 Avesh Technologies. Precision 3D Printing &amp; Hardware Prototyping Hub.</p>
+    </div>
+  </footer>
+
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+  <script>
+    function handleTrackSearch(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const query = document.getElementById('track-query-input').value.trim();
+      if (!query) return;
+      performTrack(query);
+    }
+
+    async function performTrack(query) {
+      const box = document.getElementById('tracking-result-box');
+      if (!box) return;
+
+      box.innerHTML = `
+        <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm text-center space-y-3">
+          <i class="fa-solid fa-circle-notch fa-spin text-2xl text-primary"></i>
+          <p class="text-xs text-gray-600 font-bold">Querying order records from database...</p>
+        </div>
+      `;
+
+      let order = null;
+      if (window.AveshStore && typeof window.AveshStore.findOrderAsync === 'function') {
+        order = await window.AveshStore.findOrderAsync(query);
+      } else if (window.AveshStore && typeof window.AveshStore.getOrderByIdOrPhone === 'function') {
+        order = window.AveshStore.getOrderByIdOrPhone(query);
+      }
+
+      if (!order) {
+        box.innerHTML = `
+          <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm text-center space-y-3 animate-fade">
+            <div class="w-12 h-12 rounded-full bg-red-100 text-red-500 text-xl flex items-center justify-center mx-auto">
+              <i class="fa-solid fa-receipt"></i>
+            </div>
+            <h3 class="font-extrabold text-gray-900 text-base">Order Not Found</h3>
+            <p class="text-xs text-gray-500 max-w-sm mx-auto">
+              We couldn't find any order matching "<strong>${query}</strong>". Please verify your Order ID or the 10-digit phone number entered during checkout.
+            </p>
+            <div class="pt-2">
+              <a href="https://wa.me/917988456595?text=Hi%20Avesh%20Tech,%20I%20am%20trying%20to%20track%20my%20order:%20${encodeURIComponent(query)}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:underline">
+                <i class="fa-brands fa-whatsapp text-green-600"></i> Ask maker support on WhatsApp &rarr;
+              </a>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // Map Order Status Steps: 1: Confirmed, 2: Production/Printing, 3: Packed, 4: Dispatched, 5: Delivered
+      const statusMap = {
+        'confirmed': 1,
+        'processing': 2,
+        'production': 2,
+        'packed': 3,
+        'dispatched': 4,
+        'delivered': 5
+      };
+
+      const currentStep = statusMap[order.order_status] || 1;
+      const orderDate = new Date(order.created_at || Date.now()).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      const itemsList = Array.isArray(order.items) ? order.items : [];
+      const totalStr = (typeof window.formatINR === 'function') ? window.formatINR(order.total) : ('₹' + order.total);
+      const courierName = order.courier_name || order.courier || 'Delhivery Express Logistics';
+      const awbNum = order.tracking_number ? order.tracking_number : 'Assigned upon dispatch (AWB tracking)';
+      const estDelivery = order.estimated_delivery || '2-4 Business Days';
+
+      let courierTrackingUrl = 'https://www.delhivery.com/tracking';
+      const cleanCourier = courierName.toLowerCase();
+      if (cleanCourier.includes('blue') || cleanCourier.includes('dart')) {
+        courierTrackingUrl = 'https://www.bluedart.com/tracking';
+      } else if (cleanCourier.includes('dtdc')) {
+        courierTrackingUrl = 'https://www.dtdc.in/tracking.asp';
+      } else if (cleanCourier.includes('post')) {
+        courierTrackingUrl = 'https://www.indiapost.gov.in/_layouts/15/dpt.cptc.va/trackconsignment.aspx';
+      }
+
+      const steps = [
+        { num: 1, title: 'Order Confirmed', desc: 'Verified & Maker Scheduled' },
+        { num: 2, title: '3D Printing & Assembly', desc: 'Crafting Shadow Lamp Optics' },
+        { num: 3, title: 'Quality Check & Packed', desc: 'Secure Shockproof Boxing' },
+        { num: 4, title: 'Dispatched in Transit', desc: order.tracking_number ? `${courierName} (${awbNum})` : 'Dispatched with tracking' },
+        { num: 5, title: 'Delivered', desc: 'Handed to Customer' }
+      ];
+
+      box.innerHTML = `
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6 animate-fade">
+          
+          <!-- Order Header Bar -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-gray-100 gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400 font-bold uppercase tracking-wider">ORDER DETAILS</span>
+                <span class="bg-green-100 text-green-700 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full">
+                  ${order.payment_method || 'Razorpay UPI'} • ${order.payment_status || 'Paid'}
+                </span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-gray-900 mt-0.5 font-mono">${order.id}</h2>
+              <p class="text-xs text-gray-500">Placed on ${orderDate} by <strong>${order.customer_name}</strong></p>
+            </div>
+
+            <div class="text-left sm:text-right">
+              <span class="text-xs text-gray-400 block font-medium">Estimated Arrival</span>
+              <span class="text-lg font-black text-primary">${estDelivery}</span>
+            </div>
+          </div>
+
+          <!-- Visual Progress Stepper -->
+          <div>
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-6">Live Fulfillment Progress</h3>
+            <div class="relative pl-6 sm:pl-0 sm:grid sm:grid-cols-5 gap-3 space-y-6 sm:space-y-0 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 sm:before:hidden before:bg-gray-200">
+              ${steps.map(s => {
+                const isDone = currentStep >= s.num;
+                const isCurrent = currentStep === s.num;
+                return `
+                  <div class="relative flex sm:flex-col items-start sm:items-center text-left sm:text-center gap-3 sm:gap-2">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shrink-0 shadow-sm ${
+                      isDone ? 'bg-primary text-white ring-4 ring-blue-100' : 'bg-gray-100 text-gray-400 border border-gray-300'
+                    }">
+                      ${isDone ? '<i class="fa-solid fa-check text-xs"></i>' : s.num}
+                    </div>
+                    <div>
+                      <h4 class="font-extrabold text-xs text-gray-900 leading-tight">${s.title}</h4>
+                      <p class="text-[10px] text-gray-500 mt-0.5">${s.desc}</p>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- Courier Partner Box -->
+          <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg shrink-0 shadow-sm">
+                <i class="fa-solid fa-box-open"></i>
+              </div>
+              <div>
+                <span class="font-extrabold text-gray-900 block">${courierName}</span>
+                <span class="text-[11px] text-gray-500">Tracking AWB: <strong class="font-mono text-primary font-bold">${awbNum}</strong></span>
+              </div>
+            </div>
+            <a href="${courierTrackingUrl}" target="_blank" class="bg-white hover:bg-gray-50 text-primary border border-primary/30 px-4 py-2 rounded-xl font-bold transition text-xs flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              <span>Official Courier Portal</span>
+            </a>
+          </div>
+
+          <!-- Order Summary Items Grid -->
+          <div class="border-t border-gray-100 pt-5 space-y-3">
+            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Package Contents</h4>
+            <div class="space-y-2">
+              ${itemsList.map(i => `
+                <div class="flex items-center justify-between text-xs p-3 bg-gray-50 border border-gray-100 rounded-xl">
+                  <div>
+                    <span class="font-bold text-gray-900 block">${i.name}</span>
+                    <span class="text-[10px] text-gray-400">Quantity: ${i.quantity || 1}</span>
+                  </div>
+                  <span class="font-black text-gray-900">${(typeof window.formatINR === 'function') ? window.formatINR((i.price || 0) * (i.quantity || 1)) : ('₹' + ((i.price || 0) * (i.quantity || 1)))}</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="flex justify-between items-center pt-3 text-xs">
+              <span class="font-bold text-gray-500">Total Paid Amount:</span>
+              <span class="text-base font-black text-primary">${totalStr}</span>
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    // Auto-search if ?id= is in URL parameter or if customer is logged in
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id') || params.get('order_id') || params.get('orderId') || params.get('track');
+      if (id) {
+        document.getElementById('track-query-input').value = id;
+        performTrack(id);
+      } else {
+        const cust = window.AveshAuth ? window.AveshAuth.getCustomer() : null;
+        if (cust && cust.phone) {
+          document.getElementById('track-query-input').value = cust.phone;
+          performTrack(cust.phone);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

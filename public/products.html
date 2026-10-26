@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon with Official Avesh Tech Logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Products | 3D Models, Prints, Shadow Lamps &amp; IoT | Avesh Tech</title>
+  <meta name="description" content="Browse 3D printable models, custom 3D prints, personalized shadow light lamps, and IoT prototyping kits at Avesh Technologies.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            primaryHover: '#1e40af',
+            secondary: '#f97316',
+            secondaryHover: '#ea580c',
+            dark: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#1d4ed8] text-white sticky top-0 z-40 shadow-lg border-b border-blue-600/40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20 group-hover:scale-105 transition">
+        <div class="flex flex-col leading-tight">
+          <span class="text-[10px] tracking-[0.25em] text-blue-200 font-bold uppercase">AVESH TECH</span>
+          <span class="text-xl md:text-2xl font-black tracking-tight text-white">Avesh Technologies</span>
+        </div>
+      </a>
+
+      <!-- Header Search with Category Select -->
+      <div class="hidden md:flex flex-1 max-w-xl mx-2">
+        <div class="relative w-full">
+          <input type="text" id="catalog-search-input" oninput="applyFilters()" placeholder="Search 3D shadow lamps, custom prints, IoT kits..." class="w-full bg-white text-gray-900 placeholder-gray-400 text-xs sm:text-sm pl-4 pr-11 py-2 rounded-xl shadow-sm outline-none focus:ring-2 focus:ring-amber-300">
+          <button onclick="applyFilters()" class="absolute right-1 top-1/2 -translate-y-1/2 bg-secondary hover:bg-secondaryHover text-white w-8 h-8 rounded-lg flex items-center justify-center transition shadow-sm cursor-pointer" title="Search">
+            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Utilities -->
+      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <a href="order-tracking.html" class="hidden sm:flex items-center gap-1.5 text-xs font-bold bg-white/10 hover:bg-white/20 text-white px-3.5 py-2 rounded-xl transition border border-white/20">
+          <i class="fa-solid fa-truck-fast text-yellow-300"></i>
+          <span>Track Order</span>
+        </a>
+        <a href="affiliate.html" id="header-creator-hub-btn" class="flex items-center gap-1.5 text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black px-3.5 py-2 rounded-xl transition shadow-md">
+          <i class="fa-solid fa-coins text-black"></i>
+          <span>Creator Hub</span>
+        </a>
+        <div id="header-auth-btn-wrapper">
+          <button onclick="window.AveshAuth.openAuthModal()" id="header-auth-btn" class="header-auth-btn group flex items-center gap-2 text-xs font-semibold bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md transition-all duration-200 shadow-sm cursor-pointer active:scale-95" title="Sign In or Register">
+            <div class="w-4 h-4 rounded-full bg-blue-400/30 flex items-center justify-center group-hover:bg-blue-400/50 transition">
+              <i class="fa-regular fa-user text-[10px] text-blue-100"></i>
+            </div>
+            <span id="header-auth-label" class="tracking-wide">Sign In</span>
+          </button>
+        </div>
+        <a href="cart.html" class="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-3.5 py-2 rounded-xl font-bold text-xs sm:text-sm shadow-md transition">
+          <div class="relative">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count" class="cart-count absolute -top-2.5 -right-2.5 bg-dark text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-extrabold border border-white hidden">0</span>
+          </div>
+          <span class="cart-header-total hidden sm:inline text-xs">₹0</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Category Sub-Navbar on Header (Royal Blue, Rounded Full Pills) -->
+    <nav class="bg-[#1e40af] border-t border-blue-500/40 text-xs font-semibold">
+      <div class="max-w-7xl mx-auto px-4 flex items-center gap-2 overflow-x-auto scrollbar-hide py-2 whitespace-nowrap">
+        <button onclick="setCategoryFilter('all')" data-header-cat="all" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-border-all text-secondary"></i> All Products
+        </button>
+        <button onclick="setCategoryFilter('shadow-lamps')" data-header-cat="shadow-lamps" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-lightbulb text-yellow-300"></i> 💡 3D Shadow Lamps ⭐
+        </button>
+        <button onclick="setCategoryFilter('3d-prints')" data-header-cat="3d-prints" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-print text-orange-300"></i> 🔧 Custom 3D Prints
+        </button>
+        <button onclick="setCategoryFilter('3d-models')" data-header-cat="3d-models" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-cube text-cyan-300"></i> 🖨️ 3D Models (STL)
+        </button>
+        <button onclick="setCategoryFilter('iot')" data-header-cat="iot" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-wifi text-green-300"></i> 📡 IoT Projects &amp; Kits
+        </button>
+        <button onclick="setCategoryFilter('diy-kits')" data-header-cat="diy-kits" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-toolbox text-purple-300"></i> 🧰 DIY Maker Kits
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
+    
+    <!-- Breadcrumb & Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+      <div>
+        <div class="text-xs text-gray-400 mb-1 flex items-center gap-1.5">
+          <a href="index.html" class="hover:text-primary">Home</a>
+          <i class="fa-solid fa-chevron-right text-[9px]"></i>
+          <span class="text-gray-700 font-semibold" id="catalog-breadcrumb-text">All Products</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight" id="catalog-heading">
+          Explore Our Store
+        </h1>
+      </div>
+
+      <!-- Sort Selection -->
+      <div class="flex items-center gap-2 text-xs font-semibold">
+        <label for="catalog-sort" class="text-gray-500">Sort by:</label>
+        <select id="catalog-sort" onchange="applyFilters()" class="bg-white border border-gray-300 rounded-xl px-3 py-2 outline-none focus:border-primary shadow-sm cursor-pointer">
+          <option value="featured">Featured &amp; Trending</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Top Customer Rated</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Category Pill Filters -->
+    <div class="flex items-center gap-2 overflow-x-auto scrollbar-hide py-1 mb-8">
+      <button onclick="setCategoryFilter('all')" data-cat="all" class="cat-pill active px-4 py-2 rounded-full border border-primary bg-primary text-white text-xs font-bold transition whitespace-nowrap shadow-sm">
+        All Categories
+      </button>
+      <button onclick="setCategoryFilter('shadow-lamps')" data-cat="shadow-lamps" class="cat-pill px-4 py-2 rounded-full border border-gray-300 bg-white hover:border-primary text-gray-700 text-xs font-bold transition whitespace-nowrap">
+        💡 3D Shadow Lamps ⭐
+      </button>
+      <button onclick="setCategoryFilter('3d-prints')" data-cat="3d-prints" class="cat-pill px-4 py-2 rounded-full border border-gray-300 bg-white hover:border-primary text-gray-700 text-xs font-bold transition whitespace-nowrap">
+        🔧 Custom 3D Prints
+      </button>
+      <button onclick="setCategoryFilter('3d-models')" data-cat="3d-models" class="cat-pill px-4 py-2 rounded-full border border-gray-300 bg-white hover:border-primary text-gray-700 text-xs font-bold transition whitespace-nowrap">
+        🖨️ 3D Models (STL)
+      </button>
+      <button onclick="setCategoryFilter('iot')" data-cat="iot" class="cat-pill px-4 py-2 rounded-full border border-gray-300 bg-white hover:border-primary text-gray-700 text-xs font-bold transition whitespace-nowrap">
+        📡 IoT Projects &amp; Kits
+      </button>
+      <button onclick="setCategoryFilter('diy-kits')" data-cat="diy-kits" class="cat-pill px-4 py-2 rounded-full border border-gray-300 bg-white hover:border-primary text-gray-700 text-xs font-bold transition whitespace-nowrap">
+        🧰 DIY Maker Kits
+      </button>
+    </div>
+
+    <!-- Products Grid -->
+    <div id="catalog-products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+      <div class="col-span-full py-16 text-center text-gray-400">
+        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-primary mb-3"></i>
+        <p class="text-sm font-medium">Loading catalog...</p>
+      </div>
+    </div>
+
+    <!-- Custom Manufacturing Call-to-Action -->
+    <div class="bg-gradient-to-r from-blue-900 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-md mb-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="text-xl font-black mb-1">Looking for a Custom 3D Print or Specific Electronic Part?</h3>
+        <p class="text-xs text-blue-200">We manufacture on-demand with no minimum quantity. Send your 3D files or specs directly to our engineering team.</p>
+      </div>
+      <a href="https://wa.me/917988456595?text=Hi%20Avesh%20Technologies%2C%20I%20have%20a%20custom%203D%20printing%20or%20IoT%20request." target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-bold text-xs transition flex items-center gap-2 shrink-0 shadow-md">
+        <i class="fa-brands fa-whatsapp text-lg"></i>
+        <span>Chat on WhatsApp (+91 7988456595)</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-8 border-t border-gray-800 text-xs text-gray-400 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <p class="font-bold text-white text-sm">Avesh Technologies</p>
+        <p class="text-[11px] text-gray-500">Official Store • New Delhi, India • Phone: <strong>7988456595</strong></p>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram text-base"></i> @aveshtech.in</a>
+        <a href="affiliate.html" class="text-yellow-400 font-bold hover:text-white transition">Influencer Program (10%)</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <a href="https://wa.me/917988456595" target="_blank" class="floating-whatsapp" title="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="floating-social" title="Follow on Instagram">
+    <i class="fa-brands fa-instagram text-lg"></i>
+    <span>Follow @aveshtech.in</span>
+  </a>
+
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+
+  <script>
+    let rawProducts = (window.AveshStore && window.AveshStore.getProductsSync) ? window.AveshStore.getProductsSync() : [];
+    let currentCategory = 'all';
+
+    function normalizeCategory(cat) {
+      if (!cat) return 'all';
+      const c = cat.toLowerCase().trim();
+      if (['shadow-lamps', '3d-shadow-lamps', 'shadow-lamp', 'lamps', 'lamp', 'shadow'].includes(c)) return 'shadow-lamps';
+      if (['3d-prints', 'custom-3d-prints', 'prints', '3d-print', 'custom-prints', 'print'].includes(c)) return '3d-prints';
+      if (['3d-models', 'models', 'stl', '3d-model', 'models-stl'].includes(c)) return '3d-models';
+      if (['iot', 'iot-projects', 'iot-kits', 'iot-project', 'electronics'].includes(c)) return 'iot';
+      if (['diy-kits', 'diy', 'maker-kits', 'diy-maker-kits', 'kits'].includes(c)) return 'diy-kits';
+      return 'all';
+    }
+
+    // Parse URL Query Params
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCategory = normalizeCategory(urlParams.get('category'));
+    const initialSearch = urlParams.get('search') || '';
+
+    currentCategory = initialCategory;
+    if (initialSearch) {
+      const searchInput = document.getElementById('catalog-search-input');
+      if (searchInput) searchInput.value = initialSearch;
+    }
+
+    function setCategoryFilter(cat, clearSearch = true) {
+      currentCategory = normalizeCategory(cat);
+
+      // If switching category by tab click, clear any previous search to prevent accidental 0-result filter
+      if (clearSearch) {
+        const searchInput = document.getElementById('catalog-search-input');
+        if (searchInput && searchInput.value.trim() !== '') {
+          searchInput.value = '';
+        }
+      }
+
+      // 1. Sync body pill filters
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        if (btn.dataset.cat === currentCategory) {
+          btn.className = 'cat-pill active px-4 py-2 rounded-full border border-primary bg-primary text-white text-xs font-bold transition whitespace-nowrap shadow-sm';
+        } else {
+          btn.className = 'cat-pill px-4 py-2 rounded-full border border-gray-300 bg-white hover:border-primary text-gray-700 text-xs font-bold transition whitespace-nowrap';
+        }
+      });
+
+      // 2. Sync header sub-navbar tabs (Royal Blue matching index.html)
+      document.querySelectorAll('.header-cat-tab').forEach(b => {
+        if (b.dataset.headerCat === currentCategory) {
+          b.className = 'header-cat-tab px-3.5 py-1.5 rounded-full bg-white text-blue-900 font-extrabold shadow-sm transition flex items-center gap-1.5 cursor-pointer';
+        } else {
+          b.className = 'header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer';
+        }
+      });
+
+      // 3. Keep URL query params in sync
+      if (window.history && window.history.replaceState) {
+        const url = new URL(window.location.href);
+        if (currentCategory === 'all') {
+          url.searchParams.delete('category');
+        } else {
+          url.searchParams.set('category', currentCategory);
+        }
+        window.history.replaceState({}, '', url.toString());
+      }
+
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const search = document.getElementById('catalog-search-input')?.value.toLowerCase().trim() || '';
+      const sort = document.getElementById('catalog-sort')?.value || 'featured';
+
+      let filtered = rawProducts.filter(p => {
+        const prodCat = normalizeCategory(p.category);
+        const matchesCat = currentCategory === 'all' || prodCat === currentCategory;
+        const matchesSearch = !search || 
+          p.name.toLowerCase().includes(search) || 
+          (p.short_description && p.short_description.toLowerCase().includes(search)) ||
+          (p.description && p.description.toLowerCase().includes(search)) ||
+          (p.category_name && p.category_name.toLowerCase().includes(search));
+        return matchesCat && matchesSearch;
+      });
+
+      // Sorting
+      if (sort === 'price-asc') {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sort === 'price-desc') {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sort === 'rating') {
+        filtered.sort((a, b) => (b.rating || 4.8) - (a.rating || 4.8));
+      }
+
+      // Update titles
+      const catNames = {
+        'all': 'All Products',
+        '3d-models': '3D Models (Downloadable STL Files)',
+        '3d-prints': 'Custom 3D Prints & Prototyping',
+        'shadow-lamps': '3D Shadow Light Lamps',
+        'iot': 'IoT Projects & Automation Kits',
+        'diy-kits': 'DIY Maker Kits & Components'
+      };
+      const titleEl = document.getElementById('catalog-heading');
+      if (titleEl) {
+        titleEl.textContent = search ? `Search results for "${search}" in ${catNames[currentCategory] || 'Products'}` : (catNames[currentCategory] || 'Products Catalog');
+      }
+      const breadcrumbEl = document.getElementById('catalog-breadcrumb-text');
+      if (breadcrumbEl) {
+        breadcrumbEl.textContent = catNames[currentCategory] || 'Products';
+      }
+
+      renderProducts(filtered);
+    }
+
+    function renderProducts(products) {
+      const grid = document.getElementById('catalog-products-grid');
+      if (!grid) return;
+
+      if (products.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-gray-400">
+            <i class="fa-solid fa-magnifying-glass text-4xl mb-3 text-gray-300"></i>
+            <h3 class="font-bold text-gray-700 text-base mb-1">No products found</h3>
+            <p class="text-xs text-gray-500 mb-4">Try clearing your search query or choosing another category.</p>
+            <button onclick="setCategoryFilter('all', true)" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm hover:bg-primaryHover transition">
+              View All Products
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = products.map(p => {
+        const img = Array.isArray(p.images) && p.images[0] ? p.images[0] : (p.image || 'assets/products/item-1.jpeg');
+        const discount = p.mrp && p.mrp > p.price ? Math.round((1 - p.price / p.mrp) * 100) : 0;
+
+        return `
+          <div class="product-card bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-xl transition-all duration-300 group">
+            <div class="relative">
+              <a href="product-detail.html?slug=${p.slug}" class="block aspect-square overflow-hidden bg-gray-100">
+                <img src="${img}" alt="${window.escapeHTML(p.name)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+              </a>
+              ${p.badge ? `<span class="absolute top-2.5 left-2.5 bg-secondary text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-sm">${window.escapeHTML(p.badge)}</span>` : ''}
+              ${discount > 0 ? `<span class="absolute top-2.5 right-2.5 bg-red-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded shadow-sm">${discount}% OFF</span>` : ''}
+            </div>
+
+            <div class="p-4 flex-1 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] font-bold text-secondary uppercase tracking-wider block mb-1">${window.escapeHTML(p.category_name || p.category)}</span>
+                <a href="product-detail.html?slug=${p.slug}">
+                  <h3 class="font-bold text-sm text-gray-900 hover:text-primary transition line-clamp-2 leading-snug">${window.escapeHTML(p.name)}</h3>
+                </a>
+                <div class="flex items-center gap-1 text-xs text-yellow-500 mt-1.5">
+                  <i class="fa-solid fa-star"></i>
+                  <span class="font-bold text-gray-800 text-[11px]">${p.rating || 4.9}</span>
+                  <span class="text-gray-400 text-[10px]">(${p.reviews_count || 24})</span>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-gray-100 flex flex-col gap-2">
+                <div class="flex items-baseline justify-between">
+                  <div>
+                    <span class="text-base sm:text-lg font-black text-gray-900">${window.formatINR(p.price)}</span>
+                    ${p.mrp && p.mrp > p.price ? `<span class="text-xs text-gray-400 line-through ml-1.5">${window.formatINR(p.mrp)}</span>` : ''}
+                  </div>
+                  <span class="text-[10px] text-green-600 font-bold">Fast Delivery</span>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5">
+                  <a href="product-detail.html?slug=${p.slug}&buy=now" class="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-xs font-black py-2 rounded-xl text-center shadow transition flex items-center justify-center gap-1 cursor-pointer">
+                    <i class="fa-solid fa-bolt text-[10px]"></i>
+                    <span>Buy</span>
+                  </a>
+                  <button onclick="window.AveshStore.addToCartById(${p.id}); if (window.showToast) window.showToast('Added to cart!', 'success');" class="bg-primary hover:bg-primaryHover text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm cursor-pointer">
+                    <i class="fa-solid fa-cart-plus text-[10px]"></i>
+                    <span>Add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function initCatalog() {
+      // 1. Instant synchronous initialization from memory
+      if (window.AveshStore && window.AveshStore.getProductsSync) {
+        rawProducts = window.AveshStore.getProductsSync();
+      }
+      setCategoryFilter(currentCategory, false);
+
+      // 2. Background sync with Supabase
+      if (window.AveshStore && window.AveshStore.getProducts) {
+        window.AveshStore.getProducts().then(fresh => {
+          if (fresh && Array.isArray(fresh) && fresh.length > 0) {
+            rawProducts = fresh;
+            applyFilters();
+          }
+        });
+      }
+    }
+
+    // Run immediately without waiting for DOMContentLoaded if already ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCatalog);
+    } else {
+      initCatalog();
+    }
+  </script>
+</body>
+</html>

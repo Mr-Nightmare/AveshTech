@@ -1,0 +1,98 @@
+# Avesh Technologies - Master Netlify Configuration
+# Production Publish Target: ONLY the public/ folder is deployed to the internet!
+# Private folders (admin/, database/, docs/) are physically isolated outside the public bundle.
+
+[build]
+  publish = "public"
+
+# Clean URLs & Route Rewrites
+[[redirects]]
+  from = "/product/:slug"
+  to = "/product-detail.html?slug=:slug"
+  status = 200
+
+[[redirects]]
+  from = "/products"
+  to = "/products.html"
+  status = 200
+
+[[redirects]]
+  from = "/catalog"
+  to = "/products.html"
+  status = 200
+
+[[redirects]]
+  from = "/cart"
+  to = "/cart.html"
+  status = 200
+
+[[redirects]]
+  from = "/checkout"
+  to = "/cart.html"
+  status = 200
+
+[[redirects]]
+  from = "/affiliate"
+  to = "/affiliate.html"
+  status = 200
+
+[[redirects]]
+  from = "/influencer"
+  to = "/affiliate.html"
+  status = 200
+
+[[redirects]]
+  from = "/creator"
+  to = "/affiliate.html"
+  status = 200
+
+[[redirects]]
+  from = "/creator-dashboard"
+  to = "/creator-dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/order-tracking"
+  to = "/order-tracking.html"
+  status = 200
+
+[[redirects]]
+  from = "/track"
+  to = "/order-tracking.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+# Hardened Security Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

@@ -1,0 +1,25 @@
+# OS & IDE Files
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+.idea/
+.vscode/
+
+# Private Store Operator Folders (Local Only - Never Exposed on Public GitHub)
+admin/
+database/
+docs/
+scratch/
+*.bat
+admin_test.txt
+*.log
+
+# Environment Files
+.env
+.env.local
+.env.*.local
+
+# Build Cache & Archives
+.netlify/
+*.zip

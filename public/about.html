@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon with Official Avesh Tech Logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Avesh Technologies</title>
+  <meta name="description" content="Learn about Avesh Technologies - New Delhi based maker platform specializing in 3D modeling, custom 3D printing, shadow light lamps, and IoT prototyping kits.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            primaryHover: '#1e40af',
+            secondary: '#f97316',
+            secondaryHover: '#ea580c',
+            dark: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#1d4ed8] text-white border-b border-blue-600/40 shadow-lg sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20">
+        <div class="flex flex-col leading-tight">
+          <span class="text-[10px] tracking-[0.25em] text-blue-200 font-bold uppercase">AVESH TECH</span>
+          <span class="text-xl font-black text-white">Avesh Technologies</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-3 text-xs font-bold">
+        <a href="index.html" class="text-blue-100 hover:text-white transition">Home</a>
+        <a href="products.html" class="text-blue-100 hover:text-white transition">Products</a>
+        <a href="affiliate.html" class="flex items-center gap-1.5 text-xs font-black bg-amber-400 hover:bg-amber-300 text-black px-3 py-1.5 rounded-xl transition shadow-sm">
+          <i class="fa-solid fa-coins text-black"></i>
+          <span>Creator Hub</span>
+        </a>
+        <button onclick="window.AveshAuth.openAuthModal()" id="header-auth-btn" class="header-auth-btn group flex items-center gap-2 text-xs font-semibold bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md transition-all duration-200 shadow-sm cursor-pointer active:scale-95" title="Sign In or Register">
+          <div class="w-4 h-4 rounded-full bg-blue-400/30 flex items-center justify-center group-hover:bg-blue-400/50 transition">
+            <i class="fa-regular fa-user text-[10px] text-blue-100"></i>
+          </div>
+          <span id="header-auth-label" class="tracking-wide">Sign In</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full space-y-12">
+    
+    <!-- Hero Banner -->
+    <div class="bg-gradient-to-r from-blue-900 via-primary to-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-lg">
+      <div class="max-w-3xl space-y-4">
+        <span class="bg-secondary text-white text-[11px] font-black uppercase px-3 py-1 rounded-full tracking-wider inline-block">
+          Our Story &amp; Vision
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+          Empowering India's Next Generation of Makers &amp; Creators.
+        </h1>
+        <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
+          Founded in New Delhi, Avesh Technologies bridges the gap between imagination and physical realization. We build precision 3D models, craft custom on-demand prints, design personalized shadow light boxes, and assemble plug-and-play IoT prototyping kits.
+        </p>
+      </div>
+    </div>
+
+    <!-- 4 Pillars Grid -->
+    <div>
+      <h2 class="text-2xl font-black text-gray-900 mb-6 uppercase tracking-tight text-center">What We Do</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-blue-100 text-primary flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-cube"></i>
+          </div>
+          <h3 class="font-extrabold text-base text-gray-900">3D Models &amp; STL Files</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">
+            High-resolution printable 3D files for cosplay, functional gadgets, articulated creatures, and replacement parts tested on FDM and Resin machines.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-orange-100 text-secondary flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-print"></i>
+          </div>
+          <h3 class="font-extrabold text-base text-gray-900">Custom 3D Printing</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">
+            Have a file? We print it for you in PLA, PETG, ABS, or Resin. Rapid prototyping, custom lithophanes, and personalized desk organizers shipped across India.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-yellow-100 text-yellow-600 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <h3 class="font-extrabold text-base text-gray-900">3D Shadow Light Lamps</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">
+            Magical handcrafted wooden shadow projection boxes that illuminate personalized couple names, silhouettes, and sacred deities across room walls.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-xl font-bold">
+            <i class="fa-solid fa-wifi"></i>
+          </div>
+          <h3 class="font-extrabold text-base text-gray-900">IoT Hardware &amp; Kits</h3>
+          <p class="text-xs text-gray-500 leading-relaxed">
+            Curated ESP32, Raspberry Pi, and Arduino starter kits designed to teach IoT automation, smart relays, sensor interfacing, and robotics.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Counter -->
+    <div class="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-gray-100">
+        <div class="p-4">
+          <span class="text-3xl sm:text-4xl font-black text-primary block mb-1">500+</span>
+          <span class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Orders Completed</span>
+        </div>
+        <div class="p-4">
+          <span class="text-3xl sm:text-4xl font-black text-secondary block mb-1">100%</span>
+          <span class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Custom Tailored</span>
+        </div>
+        <div class="p-4">
+          <span class="text-3xl sm:text-4xl font-black text-green-600 block mb-1">4.9★</span>
+          <span class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Customer Rating</span>
+        </div>
+        <div class="p-4">
+          <span class="text-3xl sm:text-4xl font-black text-purple-600 block mb-1">10%</span>
+          <span class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Creator Commission</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Official Community Callout -->
+    <div class="bg-gray-100 rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 border border-gray-200">
+      <div class="space-y-2 text-center md:text-left">
+        <h3 class="text-xl font-black text-gray-900">Connect With Us Directly</h3>
+        <p class="text-xs text-gray-500 max-w-xl">
+          Follow our daily 3D print builds on Instagram <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="text-pink-600 font-bold underline">@aveshtech.in</a> or message our founder directly on WhatsApp at <strong>+91 7988456595</strong>.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-5 py-3 rounded-2xl transition shadow-md flex items-center gap-2">
+          <i class="fa-brands fa-instagram text-base"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="https://wa.me/917988456595" target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-bold text-xs px-5 py-3 rounded-2xl transition shadow-md flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-6 border-t border-gray-800 text-xs text-gray-400 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <p>&copy; 2026 Avesh Technologies. Official Contact: <strong>7988456595</strong></p>
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram text-base"></i> @aveshtech.in</a>
+        <a href="affiliate.html" class="text-yellow-400 font-bold hover:text-white transition">Influencer Program (10%)</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>

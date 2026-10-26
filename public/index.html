@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon with Official Avesh Tech Logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avesh Technologies | Handcrafted 3D Shadow Projection Lamps &amp; Maker Tech</title>
+  <meta name="description" content="Avesh Technologies - India's premiere maker platform for personalized 3D shadow projection lamps, custom 3D prints, downloadable 3D models, and IoT prototyping kits.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Identity Services (GIS) Sign-In SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <!-- Custom Brand Styling -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            primaryHover: '#1e40af',
+            secondary: '#f97316',
+            secondaryHover: '#ea580c',
+            dark: '#0f172a',
+            gold: '#f59e0b'
+          },
+          fontFamily: {
+            sans: ['Inter', 'Open Sans', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+  <!-- Top Announcement Bar (Slim & Clean Royal Navy) -->
+  <div class="bg-[#0b2161] text-white text-[11px] py-1.5 px-4 border-b border-white/10 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="bg-blue-800 text-yellow-300 font-extrabold text-[9px] uppercase px-2 py-0.5 rounded border border-yellow-300/30">Official Maker Store</span>
+        <span class="text-blue-100">Handcrafted 3D Shadow Lamps, Custom Precision Prints &amp; IoT Prototyping Kits • All-India Express Delivery</span>
+      </div>
+      <div class="hidden md:flex items-center gap-4 text-blue-200 text-[11px]">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-300 transition flex items-center gap-1">
+          <i class="fa-brands fa-instagram text-xs"></i> @aveshtech.in
+        </a>
+        <span>•</span>
+        <a href="tel:7988456595" class="hover:text-white transition flex items-center gap-1">
+          <i class="fa-solid fa-phone text-[10px] text-yellow-300"></i> +91 7988456595
+        </a>
+        <span>•</span>
+        <a href="order-tracking.html" class="hover:text-yellow-300 text-yellow-300 font-bold transition flex items-center gap-1">
+          <i class="fa-solid fa-truck-fast text-[11px]"></i> Track Order
+        </a>
+        <span>•</span>
+        <a href="about.html" class="hover:text-white transition">About</a>
+        <span>•</span>
+        <a href="contact.html" class="hover:text-white transition">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header (Clean Royal Blue - Uncluttered) -->
+  <header class="bg-[#1d4ed8] text-white sticky top-[28px] z-40 shadow-lg border-b border-blue-600/40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4 lg:gap-6">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3 shrink-0">
+        <button id="mobile-menu-btn" class="md:hidden text-white hover:text-blue-100 text-2xl focus:outline-none" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20 group-hover:scale-105 transition">
+          <div class="flex flex-col leading-tight">
+            <span class="text-[10px] tracking-[0.25em] text-blue-200 font-bold uppercase">AVESH TECH</span>
+            <span class="text-xl md:text-2xl font-black tracking-tight text-white">Avesh Technologies</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Clean, Spacious Search Bar (No Clumsy Dropdown) -->
+      <div class="hidden md:flex flex-1 max-w-xl mx-2">
+        <div class="relative w-full">
+          <input type="text" id="header-search-input" placeholder="Search 3D shadow lamps, custom prints, ESP32 kits..." class="w-full bg-white text-gray-900 placeholder-gray-400 text-xs sm:text-sm pl-4 pr-11 py-2 rounded-xl shadow-sm outline-none focus:ring-2 focus:ring-amber-300">
+          <button onclick="handleHeaderSearch()" class="absolute right-1 top-1/2 -translate-y-1/2 bg-secondary hover:bg-secondaryHover text-white w-8 h-8 rounded-lg flex items-center justify-center transition shadow-sm cursor-pointer" title="Search Products">
+            <i class="fa-solid fa-magnifying-glass text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Utilities (Clean, Uncluttered) -->
+      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <!-- Creator Affiliate Link -->
+        <a href="affiliate.html" id="header-creator-hub-btn" class="flex items-center gap-1.5 text-xs font-black bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black px-3.5 py-2 rounded-xl transition shadow-md">
+          <i class="fa-solid fa-coins text-black"></i>
+          <span>Creator Hub</span>
+        </a>
+
+        <!-- Universal Account / Sign In Button -->
+        <div id="header-auth-btn-wrapper">
+          <button onclick="window.AveshAuth.openAuthModal()" id="header-auth-btn" class="header-auth-btn group flex items-center gap-2 text-xs font-semibold bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md transition-all duration-200 shadow-sm cursor-pointer active:scale-95" title="Sign In or Register">
+            <div class="w-4 h-4 rounded-full bg-blue-400/30 flex items-center justify-center group-hover:bg-blue-400/50 transition">
+              <i class="fa-regular fa-user text-[10px] text-blue-100"></i>
+            </div>
+            <span id="header-auth-label" class="tracking-wide">Sign In</span>
+          </button>
+        </div>
+
+        <!-- Cart Indicator -->
+        <a href="cart.html" class="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-3.5 py-2 rounded-xl font-bold text-xs sm:text-sm shadow-md transition">
+          <div class="relative">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count" class="cart-count absolute -top-2.5 -right-2.5 bg-dark text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-extrabold border border-white hidden">0</span>
+          </div>
+          <span class="cart-header-total hidden sm:inline text-xs">₹0</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Secondary Categories Sub-Navbar (Clean Royal Blue, Breathable Pills) -->
+    <nav class="bg-[#1e40af] border-t border-blue-500/40 text-xs font-semibold">
+      <div class="max-w-7xl mx-auto px-4 flex items-center gap-2 overflow-x-auto scrollbar-hide py-2 whitespace-nowrap">
+        <a href="products.html" data-header-cat="all" class="header-cat-tab px-3.5 py-1.5 rounded-full bg-white text-blue-900 font-extrabold shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-border-all text-secondary"></i> All Products
+        </a>
+        <a href="products.html?category=shadow-lamps" data-header-cat="shadow-lamps" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-lightbulb text-yellow-300"></i> 💡 3D Shadow Lamps ⭐
+        </a>
+        <a href="products.html?category=3d-prints" data-header-cat="3d-prints" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-print text-orange-300"></i> 🔧 Custom 3D Prints
+        </a>
+        <a href="products.html?category=3d-models" data-header-cat="3d-models" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-cube text-cyan-300"></i> 🖨️ 3D Models (STL)
+        </a>
+        <a href="products.html?category=iot" data-header-cat="iot" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-wifi text-green-300"></i> 📡 IoT Projects &amp; Kits
+        </a>
+        <a href="products.html?category=diy-kits" data-header-cat="diy-kits" class="header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-toolbox text-purple-300"></i> 🧰 DIY Maker Kits
+        </a>
+        <div class="ml-auto hidden lg:flex items-center gap-3 pl-3">
+          <a href="products.html" class="text-yellow-300 hover:underline flex items-center gap-1 font-bold">
+            <span>Explore Full Catalog (79)</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Drawer Menu (No Admin link visible) -->
+  <div id="mobile-menu-drawer" class="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 z-50 flex flex-col">
+    <div class="bg-primary text-white p-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-cube text-secondary text-xl"></i>
+        <span class="font-bold text-lg">Avesh Technologies</span>
+      </div>
+      <button id="close-mobile-menu" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <div class="p-3 border-b border-gray-100 bg-gray-50">
+      <div class="flex rounded-xl overflow-hidden border border-gray-300">
+        <input type="text" id="mobile-search-input" placeholder="Search shadow lamps, prints..." class="w-full px-3 py-2 text-sm outline-none">
+        <button onclick="handleMobileSearch()" class="bg-secondary text-white px-4"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </div>
+
+    <div class="flex-1 overflow-y-auto py-2">
+      <div class="px-4 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Product Categories</div>
+      <a href="products.html?category=shadow-lamps" class="flex items-center gap-3 px-4 py-3 bg-yellow-50 text-yellow-800 font-bold border-b border-gray-100">
+        <i class="fa-solid fa-lightbulb text-yellow-500 w-5 text-center"></i> 3D Shadow Light Lamps
+      </a>
+      <a href="products.html?category=3d-prints" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 text-gray-700 font-medium border-b border-gray-100">
+        <i class="fa-solid fa-print text-secondary w-5 text-center"></i> Custom 3D Prints
+      </a>
+      <a href="products.html?category=3d-models" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 text-gray-700 font-medium border-b border-gray-100">
+        <i class="fa-solid fa-cube text-primary w-5 text-center"></i> 3D Models (STL Files)
+      </a>
+      <a href="products.html?category=iot" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 text-gray-700 font-medium border-b border-gray-100">
+        <i class="fa-solid fa-wifi text-green-600 w-5 text-center"></i> IoT Projects &amp; Kits
+      </a>
+      <a href="products.html?category=diy-kits" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 text-gray-700 font-medium border-b border-gray-100">
+        <i class="fa-solid fa-toolbox text-purple-600 w-5 text-center"></i> DIY Maker Kits
+      </a>
+
+      <div class="px-4 pt-4 pb-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Services &amp; Programs</div>
+      <a href="order-tracking.html" class="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-800 font-bold border-b border-gray-100">
+        <i class="fa-solid fa-truck-fast text-primary w-5 text-center"></i> Track Your Order Live
+      </a>
+      <a href="affiliate.html" class="flex items-center gap-3 px-4 py-3 bg-orange-50 text-orange-700 font-bold border-b border-gray-100">
+        <i class="fa-solid fa-coins text-secondary w-5 text-center"></i> Creator Program (Earn 10%)
+      </a>
+      <a href="about.html" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-gray-700 font-medium border-b border-gray-100">
+        <i class="fa-solid fa-circle-info text-blue-500 w-5 text-center"></i> About Avesh Tech
+      </a>
+      <a href="contact.html" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 text-gray-700 font-medium border-b border-gray-100">
+        <i class="fa-solid fa-headset text-green-500 w-5 text-center"></i> Contact &amp; WhatsApp
+      </a>
+    </div>
+
+    <div class="p-4 bg-gray-100 border-t border-gray-200 text-xs text-gray-600 space-y-1.5">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-phone text-secondary"></i> +91 7988456595
+      </div>
+      <div class="flex items-center gap-2">
+        <i class="fa-brands fa-instagram text-pink-600"></i> @aveshtech.in
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 z-40 hidden backdrop-blur-sm"></div>
+
+  <!-- MAIN BODY -->
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-12">
+
+    <!-- ======================================================== -->
+    <!-- COMPACT MOVING SHOWCASE CAROUSEL BANNER -->
+    <!-- ======================================================== -->
+    <section class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#04060e] via-[#0a1128] to-[#04060e] text-white shadow-[0_10px_50px_rgba(29,78,216,0.25)] border border-blue-500/30">
+      
+      <!-- Subtle Glow Accent Backdrop -->
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Carousel Container (Compact Height 350px-380px) -->
+      <div id="hero-carousel" class="relative overflow-hidden min-h-[340px] sm:min-h-[370px] flex items-center">
+        
+        <!-- SLIDE 1: Flagship Lord Hanuman 3D Shadow Lamp -->
+        <div class="hero-slide active w-full p-6 sm:p-10 lg:px-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center transition-opacity duration-700">
+          <div class="md:col-span-7 space-y-3">
+            <span class="inline-flex items-center gap-1.5 bg-amber-500/20 text-amber-300 border border-amber-400/30 text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-wider">
+              <i class="fa-solid fa-sparkles text-yellow-400"></i> Signature Devotional Shadow Lamp
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+              Lord Hanuman Dhyan Mudra <span class="bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">3D Shadow Lamp</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-gray-300 max-w-lg leading-relaxed">
+              Casts a colossal meditating Lord Hanuman silhouette on your room wall. Engineered with optical baffles and warm 3000K golden LED illumination.
+            </p>
+            <div class="flex items-center gap-3 pt-0.5">
+              <span class="text-2xl font-black text-white">₹999</span>
+              <span class="text-xs text-gray-400 line-through">₹1,599</span>
+              <span class="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded">38% OFF</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 pt-1.5">
+              <a href="product-detail.html?slug=lord-hanuman-meditation-shadow-lamp&buy=now" class="bg-gradient-to-r from-amber-500 via-orange-600 to-amber-600 hover:from-amber-600 hover:to-orange-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-bolt text-yellow-200"></i> Buy Now
+              </a>
+              <button onclick="window.AveshStore.addToCartById(301); if(window.showToast) window.showToast('Added Hanuman Shadow Lamp to Cart!', 'success');" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition flex items-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-cart-plus"></i> + Add to Cart
+              </button>
+              <a href="product-detail.html?slug=lord-hanuman-meditation-shadow-lamp" class="text-xs text-amber-300 hover:underline flex items-center gap-1 font-semibold ml-1">
+                Details &rarr;
+              </a>
+            </div>
+          </div>
+          <div class="md:col-span-5 flex justify-center">
+            <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-amber-400/40 shadow-xl bg-black/60 group">
+              <img src="assets/products/hanuman-shadow-lamp.png" alt="Hanuman Shadow Lamp" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute bottom-2 left-2 right-2 text-center bg-black/80 text-[10px] text-amber-300 font-mono py-1 rounded backdrop-blur">Devotional Wall Silhouette</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: Personalized Couple Silhouette & Names Shadow Lamp -->
+        <div class="hero-slide hidden w-full p-6 sm:p-10 lg:px-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center transition-opacity duration-700">
+          <div class="md:col-span-7 space-y-3">
+            <span class="inline-flex items-center gap-1.5 bg-pink-500/20 text-pink-300 border border-pink-400/30 text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-wider">
+              <i class="fa-solid fa-heart text-pink-400"></i> Personalized Romantic Keepsake
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+              Personalized Couple Names &amp; <span class="bg-gradient-to-r from-pink-300 to-rose-400 bg-clip-text text-transparent">Silhouette Lamp</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-gray-300 max-w-lg leading-relaxed">
+              Custom engraved couple silhouettes &amp; names that project onto your bedroom walls. Handcrafted wooden base with soft romantic ambient glow.
+            </p>
+            <div class="flex items-center gap-3 pt-0.5">
+              <span class="text-2xl font-black text-white">₹799</span>
+              <span class="text-xs text-gray-400 line-through">₹1,299</span>
+              <span class="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded">38% OFF</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 pt-1.5">
+              <a href="product-detail.html?slug=couple-name-silhouette-shadow-lamp&buy=now" class="bg-gradient-to-r from-pink-500 via-rose-600 to-pink-600 hover:from-pink-600 hover:to-rose-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-bolt text-pink-200"></i> Buy Now
+              </a>
+              <button onclick="window.AveshStore.addToCartById(304); if(window.showToast) window.showToast('Added Couple Silhouette Lamp to Cart!', 'success');" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition flex items-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-cart-plus"></i> + Add to Cart
+              </button>
+              <a href="product-detail.html?slug=couple-name-silhouette-shadow-lamp" class="text-xs text-pink-300 hover:underline flex items-center gap-1 font-semibold ml-1">
+                Customize &rarr;
+              </a>
+            </div>
+          </div>
+          <div class="md:col-span-5 flex justify-center">
+            <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-pink-400/40 shadow-xl bg-black/60 group">
+              <img src="assets/products/model-1.jpeg" alt="Couple Silhouette Lamp" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute bottom-2 left-2 right-2 text-center bg-black/80 text-[10px] text-pink-300 font-mono py-1 rounded backdrop-blur">Couple Silhouette Projection</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: On-Demand Custom 3D Prints -->
+        <div class="hero-slide hidden w-full p-6 sm:p-10 lg:px-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center transition-opacity duration-700">
+          <div class="md:col-span-7 space-y-3">
+            <span class="inline-flex items-center gap-1.5 bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-wider">
+              <i class="fa-solid fa-print text-cyan-400"></i> Rapid Prototyping &amp; Figurine Lab
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+              Custom 3D Printing in <span class="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">PLA+, PETG &amp; 8K Resin</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-gray-300 max-w-lg leading-relaxed">
+              Have an STL file or mechanical prototype idea? We manufacture in PLA+, high-temp PETG, Carbon-fiber, and ultra-high-resolution 8K resin. No minimum order!
+            </p>
+            <div class="flex items-center gap-3 pt-0.5">
+              <span class="text-2xl font-black text-white">Starting ₹149</span>
+              <span class="bg-blue-600/30 text-blue-300 text-[10px] font-bold px-2.5 py-0.5 rounded border border-blue-400/30">Fast India-wide Courier</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 pt-1.5">
+              <a href="https://wa.me/917988456595?text=Hi%20Avesh%20Tech%2C%20I%20have%20an%20STL%20file%20for%20custom%203D%20printing." target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-lg transition flex items-center gap-1.5">
+                <i class="fa-brands fa-whatsapp text-sm"></i> Send File on WhatsApp
+              </a>
+              <a href="products.html?category=3d-prints" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition cursor-pointer flex items-center gap-1.5">
+                Explore 32+ 3D Prints
+              </a>
+            </div>
+          </div>
+          <div class="md:col-span-5 flex justify-center">
+            <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-cyan-400/40 shadow-xl bg-black/60 group">
+              <img src="assets/products/item-13.jpeg" alt="3D Figurine Print" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute bottom-2 left-2 right-2 text-center bg-black/80 text-[10px] text-cyan-300 font-mono py-1 rounded backdrop-blur">Multi-Part Articulated Print</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 4: ESP32 IoT & Robotics Hardware -->
+        <div class="hero-slide hidden w-full p-6 sm:p-10 lg:px-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center transition-opacity duration-700">
+          <div class="md:col-span-7 space-y-3">
+            <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-wider">
+              <i class="fa-solid fa-wifi text-emerald-400"></i> Smart Electronics &amp; Microcontrollers
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+              ESP32 WiFi &amp; IoT <span class="bg-gradient-to-r from-green-300 to-emerald-400 bg-clip-text text-transparent">Prototyping Kits</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-gray-300 max-w-lg leading-relaxed">
+              Hands-on STEM maker kits complete with sensors, OLED displays, 3D printed enclosures, and ready-to-run Arduino code for college projects &amp; smart homes.
+            </p>
+            <div class="flex items-center gap-3 pt-0.5">
+              <span class="text-2xl font-black text-white">₹1,199</span>
+              <span class="text-xs text-gray-400 line-through">₹1,999</span>
+              <span class="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded">40% OFF</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 pt-1.5">
+              <a href="product-detail.html?slug=esp32-wifi-plant-soil-moisture-kit&buy=now" class="bg-gradient-to-r from-emerald-500 via-green-600 to-emerald-600 hover:from-emerald-600 hover:to-green-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-bolt text-green-200"></i> Buy Now
+              </a>
+              <button onclick="window.AveshStore.addToCartById(629); if(window.showToast) window.showToast('Added ESP32 Kit to Cart!', 'success');" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition flex items-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-cart-plus"></i> + Add to Cart
+              </button>
+              <button onclick="handleHeaderCategoryClick('iot')" class="text-xs text-emerald-300 hover:underline flex items-center gap-1 font-semibold ml-1 cursor-pointer">
+                14+ Kits &rarr;
+              </button>
+            </div>
+          </div>
+          <div class="md:col-span-5 flex justify-center">
+            <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-emerald-400/40 shadow-xl bg-black/60 group">
+              <img src="assets/products/item-29.jpeg" alt="ESP32 IoT Kit" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute bottom-2 left-2 right-2 text-center bg-black/80 text-[10px] text-emerald-300 font-mono py-1 rounded backdrop-blur">Smart Moisture Sensor Kit</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 5: 3D Models STL Instant Downloads -->
+        <div class="hero-slide hidden w-full p-6 sm:p-10 lg:px-14 grid grid-cols-1 md:grid-cols-12 gap-6 items-center transition-opacity duration-700">
+          <div class="md:col-span-7 space-y-3">
+            <span class="inline-flex items-center gap-1.5 bg-purple-500/20 text-purple-300 border border-purple-400/30 text-[10px] font-black uppercase px-3 py-1 rounded-full tracking-wider">
+              <i class="fa-solid fa-cube text-purple-400"></i> Digital STL 3D Downloads
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+              Watertight Printable <span class="bg-gradient-to-r from-purple-300 to-indigo-400 bg-clip-text text-transparent">STL 3D Models</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-gray-300 max-w-lg leading-relaxed">
+              Instant digital downloads designed and pre-sliced for FDM &amp; resin printers. Flexi dragons, mech warriors, and sacred Indian temple sanctums.
+            </p>
+            <div class="flex items-center gap-3 pt-0.5">
+              <span class="text-2xl font-black text-white">Starting ₹149</span>
+              <span class="bg-purple-600/30 text-purple-300 text-[10px] font-bold px-2.5 py-0.5 rounded border border-purple-400/30">Instant Digital Delivery</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 pt-1.5">
+              <a href="product-detail.html?slug=articulated-flexi-dragon-multi-segment-stl&buy=now" class="bg-gradient-to-r from-purple-500 via-indigo-600 to-purple-600 hover:from-purple-600 hover:to-indigo-700 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-lg transition flex items-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-bolt text-purple-200"></i> Buy Now (₹149)
+              </a>
+              <button onclick="window.AveshStore.addToCartById(626); if(window.showToast) window.showToast('Added Flexi Dragon STL to Cart!', 'success');" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition flex items-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-cart-plus"></i> + Add to Cart
+              </button>
+              <button onclick="handleHeaderCategoryClick('3d-models')" class="text-xs text-purple-300 hover:underline flex items-center gap-1 font-semibold ml-1 cursor-pointer">
+                14+ STLs &rarr;
+              </button>
+            </div>
+          </div>
+          <div class="md:col-span-5 flex justify-center">
+            <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-purple-400/40 shadow-xl bg-black/60 group">
+              <img src="assets/products/item-26.jpg" alt="Articulated Dragon STL" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute bottom-2 left-2 right-2 text-center bg-black/80 text-[10px] text-purple-300 font-mono py-1 rounded backdrop-blur">Print-In-Place Flexi Dragon</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Carousel Navigation Arrows -->
+      <button onclick="changeHeroSlide(-1)" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/50 hover:bg-black/80 text-white border border-white/20 flex items-center justify-center transition backdrop-blur z-20 cursor-pointer shadow-lg" aria-label="Previous Slide">
+        <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
+      </button>
+      <button onclick="changeHeroSlide(1)" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/50 hover:bg-black/80 text-white border border-white/20 flex items-center justify-center transition backdrop-blur z-20 cursor-pointer shadow-lg" aria-label="Next Slide">
+        <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
+      </button>
+
+      <!-- Indicator Dots -->
+      <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+        <button onclick="goToHeroSlide(0)" class="hero-dot w-7 h-2 rounded-full bg-amber-400 transition-all cursor-pointer" aria-label="Slide 1"></button>
+        <button onclick="goToHeroSlide(1)" class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/80 transition-all cursor-pointer" aria-label="Slide 2"></button>
+        <button onclick="goToHeroSlide(2)" class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/80 transition-all cursor-pointer" aria-label="Slide 3"></button>
+        <button onclick="goToHeroSlide(3)" class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/80 transition-all cursor-pointer" aria-label="Slide 4"></button>
+        <button onclick="goToHeroSlide(4)" class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/80 transition-all cursor-pointer" aria-label="Slide 5"></button>
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SHADOW LAMP POSTER GALLERY (4 STYLES) -->
+    <!-- ======================================================== -->
+    <section class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-gray-200 pb-3">
+        <div>
+          <span class="text-xs font-bold text-amber-600 uppercase tracking-widest block">Artistic Collections</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-gray-900 uppercase tracking-tight">Signature 3D Shadow Lamps</h2>
+        </div>
+        <a href="products.html?category=shadow-lamps" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+          <span>Explore All Lamps</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Lamp 1: Lord Hanuman Meditating Dhyan Mudra (Signature Flagship) -->
+        <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <a href="product-detail.html?slug=lord-hanuman-meditation-shadow-lamp" class="relative aspect-square overflow-hidden bg-gray-900 block">
+            <img src="assets/products/hanuman-shadow-lamp.png" alt="Lord Hanuman Meditation Shadow Lamp" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-secondary text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow">Flagship</span>
+          </a>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-amber-600 uppercase tracking-wider block mb-1">Devotional &amp; Mandir</span>
+              <a href="product-detail.html?slug=lord-hanuman-meditation-shadow-lamp">
+                <h3 class="font-extrabold text-sm text-gray-900 hover:text-primary transition leading-snug">
+                  Lord Hanuman Dhyan Mudra 3D Shadow Lamp
+                </h3>
+              </a>
+              <p class="text-xs text-gray-500 mt-1 line-clamp-2">Casts colossal meditating Lord Hanuman silhouette on your wall. High-power LED backlighting.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+              <div>
+                <span class="text-lg font-black text-gray-900">₹999</span>
+                <span class="text-xs text-gray-400 line-through ml-1.5">₹1,599</span>
+              </div>
+              <button onclick="window.AveshStore.addToCartById(301)" class="bg-primary hover:bg-primaryHover text-white text-xs font-bold px-3.5 py-2 rounded-xl transition shadow cursor-pointer">
+                Order
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lamp 2: Divine Radha Krishna Flute Shadow Lamp (Workshop Item) -->
+        <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <a href="product-detail.html?slug=radhe-krishna-shadow-lamp" class="relative aspect-square overflow-hidden bg-gray-900 block">
+            <img src="assets/products/model-12.jpeg" alt="Divine Radha Krishna Shadow Lamp" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow">Workshop New</span>
+          </a>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-amber-600 uppercase tracking-wider block mb-1">Divine Flute Silhouette</span>
+              <a href="product-detail.html?slug=radhe-krishna-shadow-lamp">
+                <h3 class="font-extrabold text-sm text-gray-900 hover:text-primary transition leading-snug">
+                  Divine Radha Krishna Eternal Flute 3D Shadow Lamp
+                </h3>
+              </a>
+              <p class="text-xs text-gray-500 mt-1 line-clamp-2">Casts ethereal romantic Radha-Krishna silhouette with Peacock feathers and flute. Handcrafted wooden base.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+              <div>
+                <span class="text-lg font-black text-gray-900">₹849</span>
+                <span class="text-xs text-gray-400 line-through ml-1.5">₹1,399</span>
+              </div>
+              <button onclick="window.AveshStore.addToCartById(306)" class="bg-primary hover:bg-primaryHover text-white text-xs font-bold px-3.5 py-2 rounded-xl transition shadow cursor-pointer">
+                Order
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lamp 3: Sacred Om & Gayatri Mantra Resonance Lamp (Workshop Item) -->
+        <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <a href="product-detail.html?slug=om-trishul-shadow-lamp" class="relative aspect-square overflow-hidden bg-gray-900 block">
+            <img src="assets/products/model-9.jpeg" alt="Sacred Om Gayatri Mantra Lamp" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow">Spiritual Aura</span>
+          </a>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-primary uppercase tracking-wider block mb-1">Sacred Geometry</span>
+              <a href="product-detail.html?slug=om-trishul-shadow-lamp">
+                <h3 class="font-extrabold text-sm text-gray-900 hover:text-primary transition leading-snug">
+                  Sacred Om &amp; Gayatri Mantra Resonance Shadow Lamp
+                </h3>
+              </a>
+              <p class="text-xs text-gray-500 mt-1 line-clamp-2">Projects luminous OM aura with sacred Sanskrit vibration stencils. Ideal for meditation rooms &amp; temples.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+              <div>
+                <span class="text-lg font-black text-gray-900">₹699</span>
+                <span class="text-xs text-gray-400 line-through ml-1.5">₹1,199</span>
+              </div>
+              <button onclick="window.AveshStore.addToCartById(307)" class="bg-primary hover:bg-primaryHover text-white text-xs font-bold px-3.5 py-2 rounded-xl transition shadow cursor-pointer">
+                Order
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lamp 4: Personalized Couple Anniversary & Wedding Silhouette Lamp -->
+        <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <a href="product-detail.html?slug=couple-name-silhouette-shadow-lamp" class="relative aspect-square overflow-hidden bg-gray-900 block">
+            <img src="assets/products/model-1.jpeg" alt="Personalized Couple Silhouette Lamp" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-purple-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow">Custom Names</span>
+          </a>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-purple-600 uppercase tracking-wider block mb-1">Anniversary &amp; Wedding</span>
+              <a href="product-detail.html?slug=couple-name-silhouette-shadow-lamp">
+                <h3 class="font-extrabold text-sm text-gray-900 hover:text-primary transition leading-snug">
+                  Personalized Couple Anniversary &amp; Wedding Shadow Lamp
+                </h3>
+              </a>
+              <p class="text-xs text-gray-500 mt-1 line-clamp-2">Your names &amp; anniversary date custom 3D engraved with romantic backlit couple silhouette projection.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+              <div>
+                <span class="text-lg font-black text-gray-900">₹799</span>
+                <span class="text-xs text-gray-400 line-through ml-1.5">₹1,299</span>
+              </div>
+              <button onclick="window.AveshStore.addToCartById(304)" class="bg-primary hover:bg-primaryHover text-white text-xs font-bold px-3.5 py-2 rounded-xl transition shadow cursor-pointer">
+                Order
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- MAKER PILLARS: 3D PRINTS, MODELS & IOT KITS -->
+    <!-- ======================================================== -->
+    <section id="featured-products-section" class="space-y-6 scroll-mt-24">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-gray-200 pb-3">
+        <div>
+          <span class="text-xs font-bold text-primary uppercase tracking-widest block">Prototyping &amp; Manufacturing</span>
+          <h2 id="featured-section-title" class="text-2xl sm:text-3xl font-black text-gray-900 uppercase tracking-tight">3D Prints, Models &amp; IoT Kits</h2>
+        </div>
+        
+        <!-- Category Filter Tabs -->
+        <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide bg-gray-200/60 p-1 rounded-xl text-xs font-semibold">
+          <button onclick="filterFeatured('all', this)" data-cat="all" class="featured-tab active px-3.5 py-1.5 rounded-lg bg-primary text-white shadow-sm transition cursor-pointer">All Categories</button>
+          <button onclick="filterFeatured('shadow-lamps', this)" data-cat="shadow-lamps" class="featured-tab px-3.5 py-1.5 rounded-lg text-gray-700 hover:text-primary transition cursor-pointer">💡 3D Shadow Lamps ⭐</button>
+          <button onclick="filterFeatured('3d-prints', this)" data-cat="3d-prints" class="featured-tab px-3.5 py-1.5 rounded-lg text-gray-700 hover:text-primary transition cursor-pointer">🔧 Custom 3D Prints</button>
+          <button onclick="filterFeatured('3d-models', this)" data-cat="3d-models" class="featured-tab px-3.5 py-1.5 rounded-lg text-gray-700 hover:text-primary transition cursor-pointer">🖨️ 3D Models (STL)</button>
+          <button onclick="filterFeatured('iot', this)" data-cat="iot" class="featured-tab px-3.5 py-1.5 rounded-lg text-gray-700 hover:text-primary transition cursor-pointer">📡 IoT Projects &amp; Kits</button>
+          <button onclick="filterFeatured('diy-kits', this)" data-cat="diy-kits" class="featured-tab px-3.5 py-1.5 rounded-lg text-gray-700 hover:text-primary transition cursor-pointer">🧰 DIY Maker Kits</button>
+        </div>
+      </div>
+
+      <!-- Live Search / Category Feedback Banner -->
+      <div id="homepage-search-feedback" class="hidden p-3.5 bg-blue-50 border border-blue-200 rounded-2xl flex items-center justify-between text-xs">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-magnifying-glass text-primary text-sm"></i>
+          <span id="homepage-search-query-text" class="font-bold text-gray-800">Showing results...</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <a id="homepage-search-catalog-link" href="products.html" class="font-extrabold text-primary hover:underline flex items-center gap-1">
+            <span>Open in Full Catalog &rarr;</span>
+          </a>
+          <button onclick="clearHomepageSearch()" class="font-bold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-2.5 py-1 rounded-lg border border-red-200 transition">
+            Clear Filter
+          </button>
+        </div>
+      </div>
+
+      <!-- Featured Grid Container -->
+      <div id="featured-products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="col-span-full py-16 text-center text-gray-400">
+          <i class="fa-solid fa-circle-notch fa-spin text-3xl text-primary mb-3"></i>
+          <p class="text-sm font-medium">Loading maker catalog...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- POSTER BANNER: CUSTOM 3D PRINT ON DEMAND -->
+    <!-- ======================================================== -->
+    <section class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl border border-blue-900/50">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8 space-y-4">
+          <span class="bg-secondary text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+            On-Demand Manufacturing Lab
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
+            Have a 3D File or Project Idea? We Print &amp; Build It.
+          </h2>
+          <p class="text-gray-300 text-sm leading-relaxed max-w-2xl">
+            Upload your STL, OBJ, or STEP 3D files. We print in PLA+, PETG, high-temp ABS, and ultra-high-resolution 8K Resin. Perfect for college engineering projects, customized lithophanes, mechanical prototypes, or cosplay gear.
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2 text-xs font-semibold text-blue-200">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-green-400"></i> No minimum quantity</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-green-400"></i> Multi-color printing</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-green-400"></i> Fast India-wide courier dispatch</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 flex flex-col gap-3">
+          <a href="https://wa.me/917988456595?text=Hi%20Avesh%20Technologies%2C%20I%20have%20an%20STL%20file%20or%20custom%203D%20print%20requirement.%20Here%20are%20the%20details%3A" target="_blank" class="bg-green-600 hover:bg-green-700 text-white py-4 px-6 rounded-2xl font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span>Send STL File via WhatsApp</span>
+          </a>
+          <a href="contact.html" class="bg-white/10 hover:bg-white/20 text-white py-3.5 px-6 rounded-2xl font-bold text-xs text-center border border-white/20 transition">
+            Request Quote Form
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- CREATOR & INFLUENCER HUB (EARN 10%) -->
+    <!-- ======================================================== -->
+    <section class="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 rounded-3xl p-8 sm:p-10 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-2 text-center md:text-left max-w-xl">
+        <span class="bg-black/20 text-white text-[11px] font-black uppercase px-3 py-1 rounded-full tracking-wider inline-block">
+          <i class="fa-solid fa-handshake mr-1 text-yellow-300"></i> Influencer Partner Program
+        </span>
+        <h3 class="text-2xl sm:text-3xl font-black leading-tight">
+          Earn Flat 10% Commission on Every Sale!
+        </h3>
+        <p class="text-xs sm:text-sm text-orange-100 leading-relaxed">
+          Showcase custom 3D shadow lamps or IoT projects in your Instagram reels. Your followers get 5% off, and you earn weekly UPI cash straight to your Google Pay or PhonePe!
+        </p>
+      </div>
+
+      <div class="shrink-0 flex flex-col sm:flex-row gap-3">
+        <a href="affiliate.html" class="bg-white text-orange-600 hover:bg-orange-50 font-black text-xs px-6 py-3.5 rounded-2xl shadow-md transition text-center flex items-center justify-center gap-2">
+          <span>Join Creator Hub</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- INSTAGRAM COMMUNITY SHOWCASE -->
+    <!-- ======================================================== -->
+    <section class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 text-white flex items-center justify-center text-2xl shadow-md">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-black text-gray-900 leading-tight">Follow Our Maker Journey</h3>
+            <p class="text-xs text-gray-500">Daily 3D printing reels, shadow lamp reveals &amp; IoT timelapses on Instagram</p>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <span>Follow @aveshtech.in</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+        <!-- Instagram Item 1: Lord Hanuman Shadow Lamp -->
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="aspect-square rounded-2xl overflow-hidden bg-black border border-gray-200 relative group block shadow-sm">
+          <img src="assets/products/hanuman-shadow-lamp.png" alt="Hanuman Ji Shadow Lamp Reveal" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-between p-2.5 opacity-90 group-hover:opacity-100 transition">
+            <span class="self-end bg-black/60 backdrop-blur text-pink-400 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+              <i class="fa-brands fa-instagram"></i> Reel
+            </span>
+            <div>
+              <p class="text-white text-[11px] font-bold line-clamp-2 leading-tight">Lord Hanuman Ji 3D Shadow Lamp Reveal ✨</p>
+              <span class="text-[9px] text-pink-300 font-semibold mt-0.5 block"><i class="fa-solid fa-play text-[8px]"></i> 48.2k plays</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Instagram Item 2: CoreXY Bambu Lab Print -->
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="aspect-square rounded-2xl overflow-hidden bg-black border border-gray-200 relative group block shadow-sm">
+          <img src="assets/products/model-24.jpeg" alt="Bambu Lab High-Speed CoreXY 3D Printing Timelapse" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-between p-2.5 opacity-90 group-hover:opacity-100 transition">
+            <span class="self-end bg-black/60 backdrop-blur text-pink-400 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+              <i class="fa-brands fa-instagram"></i> Reel
+            </span>
+            <div>
+              <p class="text-white text-[11px] font-bold line-clamp-2 leading-tight">CoreXY High-Speed 3D Print Timelapse ⚙️</p>
+              <span class="text-[9px] text-pink-300 font-semibold mt-0.5 block"><i class="fa-solid fa-play text-[8px]"></i> 24.5k plays</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Instagram Item 3: Mandala Disc & Adiyogi -->
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="aspect-square rounded-2xl overflow-hidden bg-black border border-gray-200 relative group block shadow-sm">
+          <img src="assets/products/model-22.jpeg" alt="Sacred Mandala Disc Projection" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-between p-2.5 opacity-90 group-hover:opacity-100 transition">
+            <span class="self-end bg-black/60 backdrop-blur text-pink-400 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+              <i class="fa-brands fa-instagram"></i> Reel
+            </span>
+            <div>
+              <p class="text-white text-[11px] font-bold line-clamp-2 leading-tight">Mandala Disc &amp; Adiyogi Shadow Box 🕉️</p>
+              <span class="text-[9px] text-pink-300 font-semibold mt-0.5 block"><i class="fa-solid fa-play text-[8px]"></i> 35.1k plays</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Instagram Item 4: Couple Silhouette Lamp -->
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="aspect-square rounded-2xl overflow-hidden bg-black border border-gray-200 relative group block shadow-sm">
+          <img src="assets/products/model-1.jpeg" alt="Couple Silhouette Lamp" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-between p-2.5 opacity-90 group-hover:opacity-100 transition">
+            <span class="self-end bg-black/60 backdrop-blur text-pink-400 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+              <i class="fa-brands fa-instagram"></i> Reel
+            </span>
+            <div>
+              <p class="text-white text-[11px] font-bold line-clamp-2 leading-tight">Custom Names &amp; Couple Silhouette ❤️</p>
+              <span class="text-[9px] text-pink-300 font-semibold mt-0.5 block"><i class="fa-solid fa-play text-[8px]"></i> 19.8k plays</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Instagram Item 5: Ganesha Pagdi Idol -->
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="aspect-square rounded-2xl overflow-hidden bg-black border border-gray-200 relative group block shadow-sm">
+          <img src="assets/products/model-8.jpeg" alt="Ganesha Pagdi Idol" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-between p-2.5 opacity-90 group-hover:opacity-100 transition">
+            <span class="self-end bg-black/60 backdrop-blur text-pink-400 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+              <i class="fa-brands fa-instagram"></i> Reel
+            </span>
+            <div>
+              <p class="text-white text-[11px] font-bold line-clamp-2 leading-tight">Handcrafted Pagdi Ganesha Silk Murti 🎨</p>
+              <span class="text-[9px] text-pink-300 font-semibold mt-0.5 block"><i class="fa-solid fa-play text-[8px]"></i> 27.4k plays</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Instagram Item 6: Porsche 911 GT3RS Relief -->
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="aspect-square rounded-2xl overflow-hidden bg-black border border-gray-200 relative group block shadow-sm">
+          <img src="assets/products/item-13.jpeg" alt="Porsche 911 GT3 RS Wall Art" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-between p-2.5 opacity-90 group-hover:opacity-100 transition">
+            <span class="self-end bg-black/60 backdrop-blur text-pink-400 text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center gap-1">
+              <i class="fa-brands fa-instagram"></i> Reel
+            </span>
+            <div>
+              <p class="text-white text-[11px] font-bold line-clamp-2 leading-tight">Porsche 911 GT3 RS 3D Wall Relief 🏎️</p>
+              <span class="text-[9px] text-pink-300 font-semibold mt-0.5 block"><i class="fa-solid fa-play text-[8px]"></i> 61.0k plays</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Professional Footer (Clean - NO Admin link visible) -->
+  <footer class="bg-dark text-white pt-16 pb-8 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-gray-800">
+      
+      <!-- Brand & About -->
+      <div class="lg:col-span-2 space-y-4">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20">
+          <div class="flex flex-col leading-tight">
+            <span class="text-[10px] tracking-[0.25em] text-gray-400 font-bold uppercase">AVESH TECH</span>
+            <span class="text-2xl font-black text-white">Avesh Technologies</span>
+          </div>
+        </a>
+        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-sm">
+          Avesh Technologies is an electronics and 3D manufacturing maker platform based in New Delhi, India. We empower creators and innovators with high-precision 3D models, custom prints, shadow lamps, and IoT prototyping kits.
+        </p>
+        
+        <div class="space-y-2 text-xs text-gray-300">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-location-dot text-secondary w-4 text-center"></i>
+            <span>123 Tech Hub, Electronics Market, New Delhi, India 110001</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-phone text-secondary w-4 text-center"></i>
+            <a href="tel:7988456595" class="hover:text-white font-bold transition">+91 7988456595</a>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-envelope text-secondary w-4 text-center"></i>
+            <a href="mailto:aveshtech@gmail.com" class="hover:text-white transition">aveshtech@gmail.com</a>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <i class="fa-brands fa-instagram text-pink-400 w-4 text-center"></i>
+            <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-400 font-bold transition">instagram.com/aveshtech.in</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Categories -->
+      <div>
+        <h4 class="font-bold text-sm uppercase tracking-wider text-white border-b-2 border-secondary inline-block pb-1 mb-4">Categories</h4>
+        <ul class="space-y-2.5 text-xs text-gray-400">
+          <li><a href="products.html?category=shadow-lamps" class="text-yellow-400 hover:text-yellow-300 font-semibold transition flex items-center gap-1.5"><i class="fa-solid fa-chevron-right text-[10px]"></i> 3D Shadow Lamps ⭐</a></li>
+          <li><a href="products.html?category=3d-prints" class="hover:text-secondary transition flex items-center gap-1.5"><i class="fa-solid fa-chevron-right text-[10px]"></i> Custom 3D Prints</a></li>
+          <li><a href="products.html?category=3d-models" class="hover:text-secondary transition flex items-center gap-1.5"><i class="fa-solid fa-chevron-right text-[10px]"></i> 3D Models (STL)</a></li>
+          <li><a href="products.html?category=iot" class="hover:text-secondary transition flex items-center gap-1.5"><i class="fa-solid fa-chevron-right text-[10px]"></i> IoT Projects</a></li>
+          <li><a href="products.html?category=diy-kits" class="hover:text-secondary transition flex items-center gap-1.5"><i class="fa-solid fa-chevron-right text-[10px]"></i> DIY Maker Kits</a></li>
+        </ul>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-bold text-sm uppercase tracking-wider text-white border-b-2 border-secondary inline-block pb-1 mb-4">Quick Links</h4>
+        <ul class="space-y-2.5 text-xs text-gray-400">
+          <li><a href="affiliate.html" class="text-yellow-400 hover:text-yellow-300 font-bold transition flex items-center gap-1.5"><i class="fa-solid fa-coins text-secondary"></i> Influencer Hub (10%)</a></li>
+          <li><a href="cart.html" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-cart-shopping text-[10px]"></i> Shopping Cart</a></li>
+          <li><a href="about.html" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-[10px]"></i> About Us</a></li>
+          <li><a href="contact.html" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-headset text-[10px]"></i> Support &amp; WhatsApp</a></li>
+        </ul>
+      </div>
+
+      <!-- Trust & Payment Methods -->
+      <div>
+        <h4 class="font-bold text-sm uppercase tracking-wider text-white border-b-2 border-secondary inline-block pb-1 mb-4">Secure Shopping</h4>
+        <p class="text-xs text-gray-400 mb-3">All payments processed securely via Razorpay standard checkout. UPI, Cards &amp; Netbanking supported.</p>
+        <div class="flex flex-wrap gap-2 text-xl text-gray-300">
+          <span class="bg-gray-800 p-2 rounded-lg border border-gray-700 text-xs font-bold text-green-400"><i class="fa-solid fa-mobile-screen-button mr-1"></i> UPI / GPay</span>
+          <span class="bg-gray-800 p-2 rounded-lg border border-gray-700 text-xs font-bold text-blue-400"><i class="fa-solid fa-credit-card mr-1"></i> Cards / NetBanking</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="max-w-7xl mx-auto px-4 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-3">
+      <p>
+        &copy; 2026 Avesh Technologies. All rights reserved.
+      </p>
+      <div class="flex items-center gap-4">
+        <span>Handcrafted with precision in New Delhi, India</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick Connect Button -->
+  <a href="https://wa.me/917988456595?text=Hi%20Avesh%20Technologies%2C%20I%20have%20an%20inquiry%20about%20your%203D%20shadow%20lamps%20or%20prints." target="_blank" class="floating-whatsapp" title="Chat on WhatsApp (+91 7988456595)">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Floating Instagram Quick Connect Pill -->
+  <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="floating-social" title="Follow on Instagram">
+    <i class="fa-brands fa-instagram text-lg"></i>
+    <span>Follow @aveshtech.in</span>
+  </a>
+
+  <!-- Core Scripts -->
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+
+  <!-- Page Logic -->
+  <script>
+        // ----------------------------------------------------
+    // Hero Showcase Moving Carousel Controller
+    // ----------------------------------------------------
+    let currentHeroSlideIndex = 0;
+    let heroAutoPlayInterval = null;
+
+    function getHeroSlides() {
+      return document.querySelectorAll('#hero-carousel .hero-slide');
+    }
+
+    function getHeroDots() {
+      return document.querySelectorAll('.hero-dot');
+    }
+
+    window.goToHeroSlide = function(index) {
+      const slides = getHeroSlides();
+      const dots = getHeroDots();
+      if (!slides.length) return;
+
+      currentHeroSlideIndex = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, idx) => {
+        if (idx === currentHeroSlideIndex) {
+          slide.classList.remove('hidden');
+          slide.classList.add('active');
+        } else {
+          slide.classList.add('hidden');
+          slide.classList.remove('active');
+        }
+      });
+
+      dots.forEach((dot, idx) => {
+        if (idx === currentHeroSlideIndex) {
+          dot.className = 'hero-dot w-7 h-2 rounded-full bg-amber-400 transition-all cursor-pointer';
+        } else {
+          dot.className = 'hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/80 transition-all cursor-pointer';
+        }
+      });
+    };
+
+    window.changeHeroSlide = function(direction) {
+      goToHeroSlide(currentHeroSlideIndex + direction);
+    };
+
+    function startHeroAutoPlay() {
+      stopHeroAutoPlay();
+      heroAutoPlayInterval = setInterval(() => {
+        changeHeroSlide(1);
+      }, 4500);
+    }
+
+    function stopHeroAutoPlay() {
+      if (heroAutoPlayInterval) {
+        clearInterval(heroAutoPlayInterval);
+        heroAutoPlayInterval = null;
+      }
+    }
+
+    // Attach hover-to-pause and touch-swipe to carousel
+    const heroCarouselContainer = document.getElementById('hero-carousel');
+    if (heroCarouselContainer) {
+      heroCarouselContainer.parentElement.addEventListener('mouseenter', stopHeroAutoPlay);
+      heroCarouselContainer.parentElement.addEventListener('mouseleave', startHeroAutoPlay);
+
+      // Touch swipe support for mobile
+      let touchStartX = 0;
+      heroCarouselContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      heroCarouselContainer.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 45) {
+          changeHeroSlide(1);
+        } else if (touchEndX - touchStartX > 45) {
+          changeHeroSlide(-1);
+        }
+      }, { passive: true });
+
+      startHeroAutoPlay();
+    }
+
+    // 1. Instant synchronous product cache (0ms latency)
+    let allProducts = (window.AveshStore && window.AveshStore.getProductsSync) ? window.AveshStore.getProductsSync() : [];
+
+    // Mobile Drawer Toggle
+    const mobileDrawer = document.getElementById('mobile-menu-drawer');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      mobileDrawer.classList.remove('-translate-x-full');
+      mobileOverlay.classList.remove('hidden');
+    });
+    document.getElementById('close-mobile-menu')?.addEventListener('click', () => {
+      mobileDrawer.classList.add('-translate-x-full');
+      mobileOverlay.classList.add('hidden');
+    });
+    mobileOverlay?.addEventListener('click', () => {
+      mobileDrawer.classList.add('-translate-x-full');
+      mobileOverlay.classList.add('hidden');
+    });
+
+    function normalizeCategory(cat) {
+      if (!cat) return 'all';
+      const c = cat.toLowerCase().trim();
+      if (['shadow-lamps', '3d-shadow-lamps', 'shadow-lamp', 'lamps', 'lamp', 'shadow'].includes(c)) return 'shadow-lamps';
+      if (['3d-prints', 'custom-3d-prints', 'prints', '3d-print', 'custom-prints', 'print'].includes(c)) return '3d-prints';
+      if (['3d-models', 'models', 'stl', '3d-model', 'models-stl'].includes(c)) return '3d-models';
+      if (['iot', 'iot-projects', 'iot-kits', 'iot-project', 'electronics'].includes(c)) return 'iot';
+      if (['diy-kits', 'diy', 'maker-kits', 'diy-maker-kits', 'kits'].includes(c)) return 'diy-kits';
+      return 'all';
+    }
+
+    // ----------------------------------------------------
+    // Header Category Sub-Navbar & Dropdown Click Handlers
+    // ----------------------------------------------------
+    window.activeHeaderCategory = 'all';
+
+    window.handleHeaderCategoryClick = function(category, btnEl) {
+      const targetCat = normalizeCategory(category);
+      window.activeHeaderCategory = targetCat;
+
+      // 1. Highlight header tab
+      document.querySelectorAll('.header-cat-tab').forEach(b => {
+        if (b.dataset.headerCat === targetCat) {
+          b.className = 'header-cat-tab px-3.5 py-1.5 rounded-full bg-white text-blue-900 font-extrabold shadow-sm transition flex items-center gap-1.5 cursor-pointer';
+        } else {
+          b.className = 'header-cat-tab px-3.5 py-1.5 rounded-full text-blue-100 hover:bg-blue-800 hover:text-white transition flex items-center gap-1.5 cursor-pointer';
+        }
+      });
+
+      // 2. Clear search input to avoid conflicting 0-result filter
+      const searchInput = document.getElementById('header-search-input');
+      if (searchInput && searchInput.value.trim() !== '') {
+        searchInput.value = '';
+      }
+      const feedbackEl = document.getElementById('homepage-search-feedback');
+      if (feedbackEl) feedbackEl.classList.add('hidden');
+
+      // 3. Find matching section pill & filter
+      const sectionPill = document.querySelector(`.featured-tab[data-cat="${targetCat}"]`);
+      filterFeatured(targetCat, sectionPill);
+
+      // 4. Smooth scroll to products section
+      const section = document.getElementById('featured-products-section');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    // ----------------------------------------------------
+    // Live Search Handlers (Header + Mobile)
+    // ----------------------------------------------------
+    window.handleHeaderSearch = function() {
+      const q = document.getElementById('header-search-input')?.value.toLowerCase().trim() || '';
+      const targetCat = window.activeHeaderCategory || 'all';
+
+      const container = document.getElementById('featured-products-grid');
+      const feedbackEl = document.getElementById('homepage-search-feedback');
+      const queryTextEl = document.getElementById('homepage-search-query-text');
+      const catalogLinkEl = document.getElementById('homepage-search-catalog-link');
+
+      let filtered = allProducts.filter(p => {
+        const prodCat = normalizeCategory(p.category);
+        const matchesCat = targetCat === 'all' || prodCat === targetCat;
+        const matchesSearch = !q || 
+          p.name.toLowerCase().includes(q) || 
+          (p.short_description && p.short_description.toLowerCase().includes(q)) ||
+          (p.description && p.description.toLowerCase().includes(q)) ||
+          (p.category_name && p.category_name.toLowerCase().includes(q));
+        return matchesCat && matchesSearch;
+      });
+
+      if (feedbackEl && queryTextEl) {
+        feedbackEl.classList.remove('hidden');
+        queryTextEl.textContent = `Found ${filtered.length} products ${q ? `matching "${q}"` : ''} ${targetCat !== 'all' ? `in ${targetCat}` : 'across all categories'}`;
+        if (catalogLinkEl) {
+          catalogLinkEl.href = `products.html?${q ? `search=${encodeURIComponent(q)}&` : ''}${targetCat !== 'all' ? `category=${encodeURIComponent(targetCat)}` : ''}`;
+        }
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-16 text-center text-gray-400">
+            <i class="fa-solid fa-magnifying-glass text-4xl mb-3 text-gray-300"></i>
+            <h3 class="font-bold text-gray-700 text-base mb-1">No products found matching "${window.escapeHTML(q)}"</h3>
+            <p class="text-xs text-gray-500 mb-4">Try searching with broader terms or clear your search filter.</p>
+            <button onclick="clearHomepageSearch()" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-xl shadow-sm hover:bg-primaryHover transition">
+              View All Products
+            </button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = filtered.slice(0, 24).map(renderProductCard).join('');
+      }
+
+      const section = document.getElementById('featured-products-section');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    window.clearHomepageSearch = function() {
+      const qInput = document.getElementById('header-search-input');
+      const feedbackEl = document.getElementById('homepage-search-feedback');
+      if (qInput) qInput.value = '';
+      if (feedbackEl) feedbackEl.classList.add('hidden');
+      handleHeaderCategoryClick('all');
+    };
+
+    function handleMobileSearch() {
+      const q = document.getElementById('mobile-search-input')?.value.trim() || '';
+      if (q) {
+        const desktopInput = document.getElementById('header-search-input');
+        if (desktopInput) desktopInput.value = q;
+        handleHeaderSearch();
+        mobileDrawer?.classList.add('-translate-x-full');
+        mobileOverlay?.classList.add('hidden');
+      }
+    }
+
+    document.getElementById('header-search-input')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleHeaderSearch();
+    });
+
+    // Hero Custom Lamp Inscription
+    function orderCustomHeroLamp() {
+      const customNames = document.getElementById('hero-custom-names')?.value.trim();
+      if (customNames) {
+        const customProduct = {
+          id: 304,
+          name: 'Personalized Couple Silhouette & Names 3D Shadow Lamp',
+          slug: 'couple-name-silhouette-shadow-lamp',
+          price: 999,
+          mrp: 1799,
+          category: 'shadow-lamps',
+          image: 'assets/products/model-1.jpeg'
+        };
+        window.AveshStore.addToCart(customProduct, 1, `Custom Names: ${customNames}`);
+      } else {
+        const hanumanProduct = {
+          id: 301,
+          name: 'Lord Hanuman Dhyan Mudra 3D Shadow Projection Lamp',
+          slug: 'lord-hanuman-meditation-shadow-lamp',
+          price: 1299,
+          mrp: 2199,
+          category: 'shadow-lamps',
+          image: 'assets/products/hanuman-shadow-lamp.png'
+        };
+        window.AveshStore.addToCart(hanumanProduct, 1, '');
+      }
+      window.location.href = 'cart.html';
+    }
+
+    // Render Product Cards
+    function renderProductCard(p) {
+      const image = Array.isArray(p.images) && p.images[0] ? p.images[0] : (p.image || 'assets/products/item-1.jpeg');
+      const discount = p.mrp && p.mrp > p.price ? Math.round((1 - p.price / p.mrp) * 100) : 0;
+
+      return `
+        <div class="product-card bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between hover:shadow-xl transition-all duration-300 group">
+          <div class="relative">
+            <a href="product-detail.html?slug=${p.slug}" class="block aspect-square overflow-hidden bg-gray-100">
+              <img src="${image}" alt="${window.escapeHTML(p.name)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+            </a>
+            ${p.badge ? `<span class="absolute top-2.5 left-2.5 bg-secondary text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-sm">${window.escapeHTML(p.badge)}</span>` : ''}
+            ${discount > 0 ? `<span class="absolute top-2.5 right-2.5 bg-red-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded shadow-sm">${discount}% OFF</span>` : ''}
+          </div>
+
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold text-secondary uppercase tracking-wider block mb-1">${window.escapeHTML(p.category_name || p.category)}</span>
+              <a href="product-detail.html?slug=${p.slug}">
+                <h3 class="font-bold text-sm text-gray-900 hover:text-primary transition line-clamp-2 leading-snug">${window.escapeHTML(p.name)}</h3>
+              </a>
+              <div class="flex items-center gap-1 text-xs text-yellow-500 mt-1.5">
+                <i class="fa-solid fa-star"></i>
+                <span class="font-bold text-gray-800 text-[11px]">${p.rating || 4.9}</span>
+                <span class="text-gray-400 text-[10px]">(${p.reviews_count || 32})</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-gray-100 flex flex-col gap-2">
+              <div class="flex items-baseline justify-between">
+                <div>
+                  <span class="text-base sm:text-lg font-black text-gray-900">${window.formatINR(p.price)}</span>
+                  ${p.mrp && p.mrp > p.price ? `<span class="text-xs text-gray-400 line-through ml-1.5">${window.formatINR(p.mrp)}</span>` : ''}
+                </div>
+                <span class="text-[10px] text-green-600 font-bold">Fast Delivery</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1.5">
+                <a href="product-detail.html?slug=${p.slug}&buy=now" class="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white text-xs font-black py-2 rounded-xl text-center shadow transition flex items-center justify-center gap-1 cursor-pointer">
+                  <i class="fa-solid fa-bolt text-[10px]"></i>
+                  <span>Buy</span>
+                </a>
+                <button onclick="quickAddToCart(${p.id})" class="bg-primary hover:bg-primaryHover text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow-sm cursor-pointer">
+                  <i class="fa-solid fa-cart-plus text-[10px]"></i>
+                  <span>Add</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Quick Add To Cart
+    window.quickAddToCart = function(productId) {
+      const prod = allProducts.find(p => p.id === productId);
+      if (prod) {
+        window.AveshStore.addToCart(prod, 1);
+      }
+    };
+
+    // Filter featured tab
+    window.filterFeatured = function(category, btn) {
+      document.querySelectorAll('.featured-tab').forEach(b => {
+        b.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+        b.classList.add('text-gray-700');
+      });
+      if (btn) {
+        btn.classList.add('bg-primary', 'text-white', 'shadow-sm');
+        btn.classList.remove('text-gray-700');
+      }
+
+      const container = document.getElementById('featured-products-grid');
+      const targetCat = normalizeCategory(category);
+      let filtered = allProducts;
+      if (targetCat !== 'all') {
+        filtered = allProducts.filter(p => normalizeCategory(p.category) === targetCat);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-10 text-center text-gray-400 text-sm">No products in this category yet.</div>`;
+        return;
+      }
+      container.innerHTML = filtered.slice(0, 16).map(renderProductCard).join('');
+    };
+
+    // Load featured products on start
+    function loadHomepage() {
+      const container = document.getElementById('featured-products-grid');
+      // 1. Instant synchronous render
+      if (window.AveshStore && window.AveshStore.getProductsSync) {
+        allProducts = window.AveshStore.getProductsSync();
+      }
+      if (container && allProducts.length > 0) {
+        container.innerHTML = allProducts.slice(0, 16).map(renderProductCard).join('');
+      }
+
+      // 2. Background update
+      if (window.AveshStore && window.AveshStore.getProducts) {
+        window.AveshStore.getProducts().then(fresh => {
+          if (fresh && fresh.length > 0) {
+            allProducts = fresh;
+          }
+        });
+      }
+
+      // Record live visitor for notifications radar
+      if (window.AveshNotifications) {
+        window.AveshNotifications.notifyNewVisitor('Homepage');
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadHomepage);
+    } else {
+      loadHomepage();
+    }
+  </script>
+</body>
+</html>

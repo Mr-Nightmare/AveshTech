@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon with Official Avesh Tech Logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart &amp; Checkout | Avesh Technologies</title>
+  <meta name="description" content="Review your cart and proceed to secure checkout via Razorpay UPI/Cards or Direct WhatsApp at Avesh Technologies.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            primaryHover: '#1e40af',
+            secondary: '#f97316',
+            secondaryHover: '#ea580c',
+            dark: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#1d4ed8] text-white sticky top-0 z-40 shadow-xl border-b border-blue-600/40 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20">
+        <div class="flex flex-col leading-tight">
+          <span class="text-[10px] tracking-[0.25em] text-blue-200 font-bold uppercase">AVESH TECH</span>
+          <span class="text-xl font-black text-white">Avesh Technologies</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-3 text-xs font-bold">
+        <a href="affiliate.html" class="flex items-center gap-1.5 text-xs font-black bg-amber-400 hover:bg-amber-300 text-black px-3 py-1.5 rounded-xl transition shadow-sm">
+          <i class="fa-solid fa-coins text-black"></i>
+          <span>Creator Hub</span>
+        </a>
+        <button onclick="window.AveshAuth.openAuthModal()" id="header-auth-btn" class="header-auth-btn group flex items-center gap-2 text-xs font-semibold bg-white/10 hover:bg-white/20 text-white px-3.5 py-1.5 rounded-full border border-white/20 backdrop-blur-md transition-all duration-200 shadow-sm cursor-pointer active:scale-95" title="Sign In or Register">
+          <div class="w-4 h-4 rounded-full bg-blue-400/30 flex items-center justify-center group-hover:bg-blue-400/50 transition">
+            <i class="fa-regular fa-user text-[10px] text-blue-100"></i>
+          </div>
+          <span id="header-auth-label" class="tracking-wide">Sign In</span>
+        </button>
+        <a href="products.html" class="text-blue-100 hover:text-white transition hidden sm:inline">Continue Shopping</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
+
+    <!-- Active Referral Notice Banner (If visitor clicked ref link) -->
+    <div id="referral-alert-banner" class="hidden mb-6 bg-gradient-to-r from-orange-500 to-amber-500 text-white p-4 rounded-2xl shadow-sm flex items-center justify-between gap-4 text-xs">
+      <div class="flex items-center gap-2.5">
+        <i class="fa-solid fa-coins text-lg text-yellow-200"></i>
+        <span>Creator Partner Discount Applied! You get an extra <strong class="underline">10% creator discount</strong> on this order.</span>
+      </div>
+      <span id="referral-code-badge" class="bg-black/20 font-mono font-bold px-3 py-1 rounded-full uppercase"></span>
+    </div>
+
+    <!-- Empty Cart Screen -->
+    <div id="cart-empty-state" class="hidden bg-white border border-gray-200 rounded-3xl p-12 text-center max-w-xl mx-auto shadow-sm my-8">
+      <div class="w-20 h-20 rounded-full bg-blue-50 text-primary flex items-center justify-center text-3xl mx-auto mb-4">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </div>
+      <h2 class="text-2xl font-black text-gray-900 mb-2">Your Cart is Empty</h2>
+      <p class="text-xs text-gray-500 mb-6">Looks like you haven't added any 3D models, custom prints or IoT kits yet.</p>
+      <a href="products.html" class="inline-block bg-primary hover:bg-primaryHover text-white font-bold text-xs px-8 py-3.5 rounded-2xl shadow-md transition">
+        Browse Products Catalog
+      </a>
+    </div>
+
+    <!-- Cart Items & Checkout Grid -->
+    <div id="cart-active-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Cart Items List (7 cols) -->
+      <div class="lg:col-span-7 space-y-4">
+        <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+          <h1 class="text-xl font-black text-gray-900 uppercase tracking-tight">Your Cart Items</h1>
+          <button onclick="clearAllCart()" class="text-xs font-bold text-red-500 hover:text-red-700 transition">
+            <i class="fa-solid fa-trash-can mr-1"></i> Clear Cart
+          </button>
+        </div>
+
+        <div id="cart-items-container" class="space-y-3">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Custom Order Notes Box -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm">
+          <label class="block text-xs font-bold text-gray-700 mb-1">
+            <i class="fa-solid fa-wand-magic-sparkles text-secondary mr-1"></i> Custom Instructions / Custom Name for Lamp or Print
+          </label>
+          <input type="text" id="order-custom-notes" placeholder="e.g. Inscribe 'Rahul & Sneha' on the shadow lamp, or preferred print color" class="w-full text-xs border border-gray-300 rounded-xl px-3 py-2.5 outline-none focus:border-primary">
+          <p class="text-[10px] text-gray-400 mt-1">If your item includes custom names or photos, enter it here or we will confirm with you on WhatsApp after order.</p>
+        </div>
+      </div>
+
+      <!-- Checkout & Delivery Form (5 cols) -->
+      <div class="lg:col-span-5 space-y-5">
+        
+        <!-- Order Summary Card -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-4">
+          <h2 class="font-extrabold text-sm uppercase tracking-wider text-gray-900 border-b border-gray-100 pb-2">Order Summary</h2>
+
+          <div class="space-y-2.5 text-xs text-gray-600">
+            <div class="flex justify-between">
+              <span>Items Subtotal</span>
+              <span id="summary-subtotal" class="font-bold text-gray-900">₹0</span>
+            </div>
+            <div class="flex justify-between text-green-600">
+              <span>MRP Savings</span>
+              <span id="summary-savings" class="font-bold">-₹0</span>
+            </div>
+            <div id="summary-ref-discount-row" class="hidden justify-between text-orange-600 font-semibold">
+              <span>Creator Referral Discount (10%)</span>
+              <span id="summary-ref-discount">-₹0</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Shipping Fee (India)</span>
+              <span id="summary-shipping" class="font-bold text-gray-900">₹79</span>
+            </div>
+            <p id="free-shipping-tag" class="text-[10px] text-green-600 font-bold hidden">
+              🎉 FREE Shipping unlocked (Orders above ₹999)
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-gray-200 flex justify-between items-baseline">
+            <span class="font-black text-base text-gray-900">Grand Total</span>
+            <span id="summary-total" class="font-black text-2xl text-primary">₹0</span>
+          </div>
+
+          <!-- Creator Referral / Coupon Input -->
+          <div class="p-3 bg-amber-50/80 border border-amber-200 rounded-2xl space-y-2 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-amber-950 flex items-center gap-1.5">
+                <i class="fa-solid fa-gift text-amber-600"></i> Creator Referral Code:
+              </span>
+              <span class="text-[10px] font-black text-amber-800 bg-amber-200/80 px-2 py-0.5 rounded uppercase">10% OFF</span>
+            </div>
+            <div class="flex gap-2">
+              <input type="text" id="coupon-input" placeholder="Enter creator referral code" class="w-full text-xs uppercase font-mono font-bold border border-amber-300 rounded-xl px-3 py-2 outline-none focus:border-amber-500 bg-white">
+              <button onclick="applyCoupon()" class="bg-amber-500 hover:bg-amber-600 text-black font-extrabold text-xs px-4 py-2 rounded-xl transition cursor-pointer whitespace-nowrap">Apply</button>
+            </div>
+            <div id="cart-ref-feedback" class="hidden text-[11px] font-semibold"></div>
+          </div>
+        </div>
+
+        <!-- Customer Delivery Information Form -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-4">
+          <h2 class="font-extrabold text-sm uppercase tracking-wider text-gray-900 border-b border-gray-100 pb-2">Delivery Details</h2>
+
+          <form id="checkout-form" class="space-y-3 text-xs">
+            <div>
+              <label class="block font-bold text-gray-700 mb-1">Full Name *</label>
+              <input type="text" id="cust-name" required placeholder="Your Full Name" class="w-full border border-gray-300 rounded-xl px-3 py-2 outline-none focus:border-primary">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-gray-700 mb-1">Phone Number *</label>
+                <input type="tel" id="cust-phone" required placeholder="7988456595" class="w-full border border-gray-300 rounded-xl px-3 py-2 outline-none focus:border-primary">
+              </div>
+              <div>
+                <label class="block font-bold text-gray-700 mb-1">Email (Optional)</label>
+                <input type="email" id="cust-email" placeholder="you@gmail.com" class="w-full border border-gray-300 rounded-xl px-3 py-2 outline-none focus:border-primary">
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-bold text-gray-700 mb-1">Delivery Address *</label>
+              <textarea id="cust-address" required rows="2" placeholder="House/Flat No, Street, Landmark" class="w-full border border-gray-300 rounded-xl p-2 outline-none focus:border-primary"></textarea>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label class="block font-bold text-gray-700 mb-1">City *</label>
+                <input type="text" id="cust-city" required placeholder="Delhi" class="w-full border border-gray-300 rounded-xl px-2.5 py-2 outline-none focus:border-primary">
+              </div>
+              <div>
+                <label class="block font-bold text-gray-700 mb-1">State *</label>
+                <input type="text" id="cust-state" required placeholder="Delhi" class="w-full border border-gray-300 rounded-xl px-2.5 py-2 outline-none focus:border-primary">
+              </div>
+              <div>
+                <label class="block font-bold text-gray-700 mb-1">PIN Code *</label>
+                <input type="text" id="cust-pincode" required placeholder="110001" class="w-full border border-gray-300 rounded-xl px-2.5 py-2 outline-none focus:border-primary">
+              </div>
+            </div>
+
+            <!-- Payment Trigger Buttons -->
+            <div class="pt-4 space-y-3">
+              <!-- Razorpay Button -->
+              <button type="button" onclick="handleRazorpayCheckout()" class="w-full bg-gradient-to-r from-amber-500 via-orange-600 to-amber-600 hover:from-amber-600 hover:to-orange-700 text-white font-black text-sm py-4 rounded-2xl shadow-xl transition flex items-center justify-center gap-2 cursor-pointer transform hover:-translate-y-0.5">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>Pay Online with Razorpay (UPI / Cards)</span>
+              </button>
+
+              <!-- WhatsApp Order Alternative -->
+              <button type="button" onclick="handleWhatsAppCheckout()" class="w-full bg-green-600 hover:bg-green-700 text-white font-extrabold text-sm py-3.5 rounded-2xl shadow-md transition flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Order via WhatsApp (Pay on Confirmation)</span>
+              </button>
+            </div>
+          </form>
+
+          <p class="text-[10px] text-gray-400 text-center flex items-center justify-center gap-1.5 pt-2">
+            <i class="fa-solid fa-lock text-green-600"></i>
+            <span>100% Secure 256-bit Encrypted Checkout</span>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Order Success Modal / Receipt -->
+    <div id="order-success-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+      <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 text-center shadow-2xl">
+        <div class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-3xl mx-auto mb-4">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3 class="text-2xl font-black text-gray-900 mb-1">Order Confirmed!</h3>
+        <p class="text-xs text-gray-500 mb-4">Thank you for your order at Avesh Technologies.</p>
+        
+        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4 text-left text-xs mb-6 space-y-1.5">
+          <p><strong>Order ID:</strong> <span id="success-order-id" class="font-mono text-primary font-bold"></span></p>
+          <p><strong>Amount:</strong> <span id="success-order-total" class="font-bold text-gray-900"></span></p>
+          <p><strong>Payment:</strong> <span id="success-payment-status" class="uppercase font-bold text-green-600"></span></p>
+          <p class="text-gray-500 text-[11px] pt-1 border-t border-gray-200 mt-2">
+            We are preparing your 3D models &amp; prints. Our dispatch team will send updates to your phone.
+          </p>
+        </div>
+
+        <div class="space-y-2.5">
+          <a id="success-track-btn" href="order-tracking.html" class="w-full bg-primary hover:bg-primaryHover text-white font-extrabold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+            <i class="fa-solid fa-truck-fast"></i>
+            <span>Track Order Live (3D Print &amp; Courier Stepper)</span>
+          </a>
+          <button id="success-whatsapp-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-xs py-3 rounded-xl transition flex items-center justify-center gap-2">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span>Send Order Copy to WhatsApp (7988456595)</span>
+          </button>
+          <a href="index.html" class="block text-xs font-bold text-gray-600 hover:text-primary py-2 transition">
+            Continue Shopping &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-6 border-t border-gray-800 text-xs text-gray-400 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <p>&copy; 2026 Avesh Technologies. Official Contact: <strong>7988456595</strong></p>
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram text-base"></i> @aveshtech.in</a>
+        <a href="affiliate.html" class="hover:text-yellow-300 text-yellow-400 font-bold transition">Influencer Program</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+
+  <script>
+    let appliedCouponDiscount = 0;
+
+    function renderCartPage() {
+      const cart = window.AveshStore.getCart();
+      const emptyState = document.getElementById('cart-empty-state');
+      const activeGrid = document.getElementById('cart-active-grid');
+      const container = document.getElementById('cart-items-container');
+
+      if (!cart || cart.length === 0) {
+        emptyState.classList.remove('hidden');
+        activeGrid.classList.add('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      activeGrid.classList.remove('hidden');
+
+      // Auto-fill logged in customer details
+      if (window.AveshAuth) {
+        const customer = window.AveshAuth.getCustomer();
+        if (customer) {
+          const nameEl = document.getElementById('cust-name');
+          const phoneEl = document.getElementById('cust-phone');
+          const emailEl = document.getElementById('cust-email');
+          if (nameEl && !nameEl.value) nameEl.value = customer.name || '';
+          if (phoneEl && !phoneEl.value) phoneEl.value = customer.phone || '';
+          if (emailEl && !emailEl.value) emailEl.value = customer.email || '';
+          if (customer.address) {
+            const addrEl = document.getElementById('cust-address');
+            const cityEl = document.getElementById('cust-city');
+            const stateEl = document.getElementById('cust-state');
+            const pinEl = document.getElementById('cust-pincode');
+            if (addrEl && !addrEl.value) addrEl.value = customer.address.address || '';
+            if (cityEl && !cityEl.value) cityEl.value = customer.address.city || '';
+            if (stateEl && !stateEl.value) stateEl.value = customer.address.state || '';
+            if (pinEl && !pinEl.value) pinEl.value = customer.address.pincode || '';
+          }
+        }
+      }
+
+      // Check active referral
+      const activeRef = window.AveshStore.getActiveReferral();
+      const refBanner = document.getElementById('referral-alert-banner');
+      const refBadge = document.getElementById('referral-code-badge');
+      if (activeRef) {
+        refBanner.classList.remove('hidden');
+        refBadge.textContent = activeRef.toUpperCase();
+      } else {
+        refBanner.classList.add('hidden');
+      }
+
+      // Render Items
+      container.innerHTML = cart.map(item => `
+        <div class="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5">
+            <img src="${item.image || 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=120&q=80'}" class="w-16 h-16 rounded-xl object-cover bg-gray-100 border border-gray-200 shrink-0">
+            <div>
+              <a href="product-detail.html?slug=${item.slug}" class="font-bold text-sm text-gray-900 hover:text-primary transition line-clamp-1">${item.name}</a>
+              <span class="text-[11px] text-gray-400 block">${item.category}</span>
+              <span class="text-xs font-black text-gray-900 sm:hidden block mt-1">${window.formatINR(item.price)} each</span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between w-full sm:w-auto gap-4">
+            <!-- Quantity Counter -->
+            <div class="flex items-center border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
+              <button onclick="window.AveshStore.updateQuantity(${item.id}, ${item.quantity - 1}); renderCartPage();" class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-200 font-bold transition">-</button>
+              <span class="w-8 text-center text-xs font-bold text-gray-900">${item.quantity}</span>
+              <button onclick="window.AveshStore.updateQuantity(${item.id}, ${item.quantity + 1}); renderCartPage();" class="w-8 h-8 flex items-center justify-center text-gray-600 hover:bg-gray-200 font-bold transition">+</button>
+            </div>
+
+            <!-- Price -->
+            <div class="text-right min-w-[70px]">
+              <span class="font-black text-sm text-gray-900">${window.formatINR(item.price * item.quantity)}</span>
+            </div>
+
+            <!-- Remove Button -->
+            <button onclick="window.AveshStore.removeFromCart(${item.id}); renderCartPage();" class="text-gray-400 hover:text-red-500 transition p-1" title="Remove">
+              <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      // Update Totals
+      const totals = window.AveshStore.getCartTotals(appliedCouponDiscount);
+      document.getElementById('summary-subtotal').textContent = window.formatINR(totals.subtotal);
+      document.getElementById('summary-savings').textContent = '-' + window.formatINR(totals.savings);
+      
+      const refRow = document.getElementById('summary-ref-discount-row');
+      if (totals.referralDiscount > 0) {
+        refRow.classList.remove('hidden');
+        refRow.classList.add('flex');
+        document.getElementById('summary-ref-discount').textContent = '-' + window.formatINR(totals.referralDiscount);
+      } else {
+        refRow.classList.add('hidden');
+        refRow.classList.remove('flex');
+      }
+
+      document.getElementById('summary-shipping').textContent = totals.shippingFee === 0 ? 'FREE' : window.formatINR(totals.shippingFee);
+      document.getElementById('free-shipping-tag')?.classList.toggle('hidden', totals.shippingFee !== 0);
+      document.getElementById('summary-total').textContent = window.formatINR(totals.total);
+    }
+
+    function clearAllCart() {
+      if (confirm('Clear all items from your cart?')) {
+        window.AveshStore.clearCart();
+        renderCartPage();
+      }
+    }
+
+    function applyCoupon() {
+      const input = document.getElementById('coupon-input');
+      const feedbackEl = document.getElementById('cart-ref-feedback');
+      const code = input ? input.value.trim().toUpperCase() : '';
+      if (!code) {
+        if (feedbackEl) {
+          feedbackEl.className = 'text-[11px] font-bold text-red-600 block';
+          feedbackEl.textContent = 'Please enter a referral code.';
+        }
+        return;
+      }
+
+      const res = window.AveshStore.validateReferralCodeSync(code);
+      if (res.valid) {
+        window.AveshStore.applyReferralCode(res.code);
+        const totals = window.AveshStore.getCartTotals();
+        appliedCouponDiscount = Math.round(totals.subtotal * 0.10);
+        if (feedbackEl) {
+          feedbackEl.className = 'text-[11px] font-bold text-green-700 block';
+          feedbackEl.innerHTML = `<i class="fa-solid fa-circle-check"></i> Code <strong>${res.code}</strong> applied! 10% discount added for creator ${res.creator_name}.`;
+        }
+        if (window.showToast) window.showToast(`Creator code ${res.code} applied: 10% OFF!`, 'success');
+        renderCartPage();
+      } else {
+        if (feedbackEl) {
+          feedbackEl.className = 'text-[11px] font-bold text-red-600 block';
+          feedbackEl.textContent = res.message || 'Invalid code.';
+        }
+      }
+    }
+
+    // Validate checkout form
+    function getCheckoutFormData() {
+      const name = document.getElementById('cust-name').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const email = document.getElementById('cust-email').value.trim();
+      const address = document.getElementById('cust-address').value.trim();
+      const city = document.getElementById('cust-city').value.trim();
+      const state = document.getElementById('cust-state').value.trim();
+      const pincode = document.getElementById('cust-pincode').value.trim();
+      const customNotes = document.getElementById('order-custom-notes').value.trim();
+
+      if (!name || !phone || !address || !city || !state || !pincode) {
+        alert('Please fill in all required delivery details (Name, Phone, Address, City, State, PIN).');
+        return null;
+      }
+
+      const cart = window.AveshStore.getCart();
+      const totals = window.AveshStore.getCartTotals(appliedCouponDiscount);
+      const activeRef = window.AveshStore.getActiveReferral();
+
+      if (window.AveshNotifications && typeof window.AveshNotifications.notifyCheckoutInitiated === 'function') {
+        window.AveshNotifications.notifyCheckoutInitiated(name, phone, totals.total);
+      }
+
+      return {
+        customer_name: name,
+        email: email,
+        phone: phone,
+        shipping_address: { address, city, state, pincode },
+        items: cart,
+        subtotal: totals.subtotal,
+        discount: totals.couponDiscount + totals.referralDiscount,
+        referral_code: activeRef ? activeRef.toUpperCase() : '',
+        shipping_fee: totals.shippingFee,
+        total: totals.total,
+        customer_notes: customNotes
+      };
+    }
+
+    // 1. Razorpay Checkout
+    async function handleRazorpayCheckout() {
+      const orderData = getCheckoutFormData();
+      if (!orderData) return;
+
+      orderData.payment_method = 'razorpay';
+      orderData.payment_status = 'pending';
+
+      window.AveshStore.initRazorpayPayment(
+        orderData,
+        // On Payment Success:
+        async function(paymentId) {
+          orderData.payment_status = 'paid';
+          orderData.razorpay_payment_id = paymentId;
+          const created = await window.AveshStore.createOrder(orderData);
+          window.AveshStore.clearCart();
+          showOrderSuccess(created);
+        },
+        // On Dismiss:
+        function() {
+          window.showToast('Payment window closed. Your items are still in cart.', 'info');
+        }
+      );
+    }
+
+    // 2. WhatsApp Checkout
+    async function handleWhatsAppCheckout() {
+      const orderData = getCheckoutFormData();
+      if (!orderData) return;
+
+      orderData.payment_method = 'whatsapp';
+      orderData.payment_status = 'pending_confirmation';
+      const created = await window.AveshStore.createOrder(orderData);
+      window.AveshStore.clearCart();
+      window.AveshStore.sendWhatsAppOrder(created);
+      showOrderSuccess(created);
+    }
+
+    function showOrderSuccess(order) {
+      document.getElementById('cart-active-grid').classList.add('hidden');
+      document.getElementById('order-success-modal').classList.remove('hidden');
+      document.getElementById('success-order-id').textContent = order.id;
+      document.getElementById('success-order-total').textContent = window.formatINR(order.total);
+      document.getElementById('success-payment-status').textContent = `${order.payment_method.toUpperCase()} • ${order.payment_status}`;
+
+      const trackBtn = document.getElementById('success-track-btn');
+      if (trackBtn) {
+        trackBtn.href = `order-tracking.html?id=${order.id}`;
+      }
+
+      document.getElementById('success-whatsapp-btn').onclick = function() {
+        window.AveshStore.sendWhatsAppOrder(order);
+      };
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCartPage);
+  </script>
+</body>
+</html>

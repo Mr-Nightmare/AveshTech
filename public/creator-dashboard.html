@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Favicon with Official Avesh Tech Logo -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator &amp; Influencer Earnings Dashboard | Avesh Technologies</title>
+  <meta name="description" content="Track your referral sales, 10% creator commissions, and request instant UPI payouts.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1d4ed8',
+            primaryHover: '#1e40af',
+            secondary: '#f97316',
+            secondaryHover: '#ea580c',
+            dark: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-[#1d4ed8] text-white border-b border-blue-600/40 sticky top-0 z-40 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <img src="assets/logo.png" alt="Avesh Technologies" class="w-10 h-10 rounded-xl object-contain shadow-md bg-[#002f87] p-1 border border-white/20">
+        <div class="flex flex-col leading-tight">
+          <span class="text-[10px] tracking-[0.25em] text-blue-200 font-bold uppercase">CREATOR PORTAL</span>
+          <span class="text-xl font-black text-white">Avesh Technologies</span>
+        </div>
+      </a>
+
+      <!-- Creator Status & Navigation -->
+      <div class="flex items-center gap-3">
+        <div id="header-creator-badge" class="hidden sm:flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-xl text-xs font-bold text-yellow-300 border border-white/10">
+          <i class="fa-solid fa-crown text-yellow-400"></i>
+          <span id="header-creator-handle">@creator</span>
+        </div>
+        <a href="index.html" class="text-xs text-blue-100 hover:text-white px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 transition">
+          Store Front
+        </a>
+        <button onclick="window.AveshAuth.logoutCreator()" class="bg-red-600/90 hover:bg-red-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full space-y-8">
+
+    <!-- Not Logged In State (Security Guard + Direct Creator Sign In Form) -->
+    <div id="creator-locked-state" class="hidden bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 max-w-lg mx-auto shadow-md my-8 space-y-5">
+      <div class="text-center space-y-1.5">
+        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 text-2xl flex items-center justify-center mx-auto shadow-inner">
+          <i class="fa-solid fa-crown"></i>
+        </div>
+        <div class="inline-block bg-amber-100 text-amber-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full">
+          Partner Program • 10% Commission
+        </div>
+        <h2 class="text-2xl font-black text-gray-900">Creator Earnings Dashboard</h2>
+        <p class="text-xs text-gray-500 max-w-sm mx-auto">
+          Sign in or register to get your custom referral link, track live orders, and request weekly UPI payouts.
+        </p>
+      </div>
+
+      <!-- Value Props -->
+      <div class="bg-amber-50/60 border border-amber-200/80 rounded-2xl p-3.5 text-xs space-y-2 text-left">
+        <div class="flex items-center gap-2 text-gray-700">
+          <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
+          <span><strong>Flat 10% Commission</strong> on every product purchased</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-700">
+          <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
+          <span><strong>10% Discount Code</strong> for your followers</span>
+        </div>
+        <div class="flex items-center gap-2 text-gray-700">
+          <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
+          <span><strong>Direct Weekly UPI Transfers</strong> (GPay / PhonePe / Paytm)</span>
+        </div>
+      </div>
+
+      <div id="dash-auth-error" class="hidden p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-800 space-y-1"></div>
+
+      <!-- Google Sign-In for Creators (PRIMARY ACTION) -->
+      <div class="space-y-2 pt-1">
+        <button type="button" onclick="window.AveshAuth.signInWithGoogle('creator')" class="w-full flex items-center justify-center gap-3 bg-white hover:bg-amber-50 text-gray-900 font-extrabold text-xs py-3.5 px-4 rounded-2xl border-2 border-gray-300 hover:border-secondary shadow-md transition cursor-pointer active:scale-98">
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Sign Up / Sign In as Creator with Google</span>
+        </button>
+        <p class="text-[11px] text-gray-400 text-center">
+          Instant 1-click Google authentication &bull; Set up Instagram &amp; UPI in the next step
+        </p>
+      </div>
+
+      <!-- 3-Step Process Indicator -->
+      <div class="grid grid-cols-3 gap-2 py-3 text-center text-[11px] text-gray-500 border-t border-b border-gray-100">
+        <div class="space-y-0.5">
+          <div class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 font-bold mx-auto flex items-center justify-center text-xs">1</div>
+          <p class="font-bold text-gray-800 text-[11px]">Google Auth</p>
+          <p class="text-[10px] text-gray-400">1-Click Sign In</p>
+        </div>
+        <div class="space-y-0.5">
+          <div class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 font-bold mx-auto flex items-center justify-center text-xs">2</div>
+          <p class="font-bold text-gray-800 text-[11px]">Link UPI &amp; Insta</p>
+          <p class="text-[10px] text-gray-400">15-sec setup</p>
+        </div>
+        <div class="space-y-0.5">
+          <div class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 font-bold mx-auto flex items-center justify-center text-xs">3</div>
+          <p class="font-bold text-gray-800 text-[11px]">Earn 10%</p>
+          <p class="text-[10px] text-gray-400">Weekly Payouts</p>
+        </div>
+      </div>
+
+      <!-- Legacy Password Sign In (Collapsible) -->
+      <div class="pt-1 text-center">
+        <button type="button" onclick="document.getElementById('dash-legacy-login-box').classList.toggle('hidden')" class="text-[11px] font-semibold text-gray-400 hover:text-gray-700 cursor-pointer">
+          Have an older password account? Click here
+        </button>
+        <div id="dash-legacy-login-box" class="hidden mt-3 p-3 bg-gray-50 rounded-2xl border border-gray-200 text-left space-y-2">
+          <form id="dash-form-login" onsubmit="handleDashCreatorLogin(event)" class="space-y-2 text-xs">
+            <div>
+              <label class="block font-bold text-gray-700 text-[10px]">Referral Code / Email / Mobile</label>
+              <input type="text" id="dash-login-id" required class="w-full border border-gray-300 rounded-lg px-2.5 py-1.5 outline-none font-bold uppercase text-xs" placeholder="e.g. YOURCODE">
+            </div>
+            <div>
+              <label class="block font-bold text-gray-700 text-[10px]">Password</label>
+              <input type="password" id="dash-login-pass" required class="w-full border border-gray-300 rounded-lg px-2.5 py-1.5 outline-none text-xs" placeholder="••••••••">
+            </div>
+            <button type="submit" id="dash-login-btn" class="w-full bg-secondary text-white font-bold text-xs py-2 rounded-lg cursor-pointer">
+              Sign In with Password
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="text-center pt-2 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between text-xs gap-2">
+        <a href="affiliate.html" class="text-secondary font-extrabold hover:underline">
+          View Commission Rates &amp; Details &rarr;
+        </a>
+        <a href="index.html" class="text-gray-400 hover:text-gray-700 transition">
+          Back to Store
+        </a>
+      </div>
+    </div>
+
+    <!-- Active Authenticated Dashboard -->
+    <div id="creator-active-dashboard" class="space-y-8">
+
+      <!-- Welcome Banner -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-900/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2.5">
+            <span class="bg-green-500/20 text-green-400 border border-green-500/30 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+              Verified Partner
+            </span>
+            <span id="dash-rate-badge" class="text-xs text-gray-400 font-mono">10% Flat Commission</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-2">
+            <span>Welcome,</span>
+            <span id="dash-creator-name" class="text-amber-400">Creator</span>
+          </h1>
+          <p class="text-xs text-gray-300">
+            Instagram: <strong id="dash-creator-instagram" class="text-pink-400 font-mono">@handle</strong> • Payout UPI: <strong id="dash-creator-upi" class="text-green-300 font-mono">name@upi</strong>
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+          <button onclick="openEditProfileModal()" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition border border-white/20 shadow-md flex items-center gap-2 cursor-pointer active:scale-95">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <span>Edit Profile &amp; Instagram</span>
+          </button>
+          <button onclick="window.AveshAuth.logoutCreator()" class="bg-white/10 hover:bg-white/20 text-gray-200 hover:text-white border border-white/15 text-xs font-semibold px-3.5 py-2.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i>
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Shareable Link Hero Bar -->
+      <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 rounded-3xl p-6 sm:p-8 text-white shadow-lg space-y-4">
+        <div>
+          <span class="text-[11px] font-black uppercase tracking-wider text-amber-100 block mb-1">
+            <i class="fa-solid fa-link mr-1"></i> Your Dedicated Tracking Link
+          </span>
+          <h2 class="text-xl sm:text-2xl font-black">Share this link to earn 10% on every order:</h2>
+          <p class="text-xs text-amber-100 mt-1">Your followers also automatically receive an extra 5% discount at checkout!</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-3 bg-black/25 p-2 rounded-2xl border border-white/20 backdrop-blur-sm">
+          <input type="text" id="dash-share-link" readonly class="w-full bg-transparent px-3 py-2 text-sm font-mono text-white outline-none select-all font-bold">
+          <button onclick="copyCreatorLink()" class="w-full sm:w-auto bg-dark hover:bg-black text-white px-6 py-2.5 rounded-xl font-black text-xs transition flex items-center justify-center gap-2 shrink-0 shadow-md">
+            <i class="fa-solid fa-copy text-yellow-400"></i>
+            <span id="copy-btn-label">Copy Link</span>
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 pt-2 text-xs">
+          <span class="font-bold text-amber-100">1-Click Share:</span>
+          <button onclick="shareWhatsApp()" class="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+            <span>Share to WhatsApp</span>
+          </button>
+          <a href="https://www.instagram.com" target="_blank" class="bg-pink-600 hover:bg-pink-700 text-white font-bold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-sm">
+            <i class="fa-brands fa-instagram text-sm"></i>
+            <span>Put in Instagram Bio</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Live Metrics Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <!-- Metric 1: Clicks -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Link Clicks</span>
+            <div class="w-8 h-8 rounded-xl bg-blue-50 text-primary flex items-center justify-center text-sm">
+              <i class="fa-solid fa-arrow-pointer"></i>
+            </div>
+          </div>
+          <span id="metric-clicks" class="text-3xl font-black text-gray-900 block">0</span>
+          <p class="text-[10px] text-gray-400">Visitors referred to store</p>
+        </div>
+
+        <!-- Metric 2: Orders -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Purchases Made</span>
+            <div class="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+          </div>
+          <span id="metric-orders" class="text-3xl font-black text-gray-900 block">0</span>
+          <p class="text-[10px] text-gray-400">Paid customer conversions</p>
+        </div>
+
+        <!-- Metric 3: Total Commission -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm space-y-1">
+          <div class="flex items-center justify-between">
+            <span id="dash-metric-rate-label" class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Total Earned (10%)</span>
+            <div class="w-8 h-8 rounded-xl bg-green-50 text-green-600 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-coins"></i>
+            </div>
+          </div>
+          <span id="metric-total-earned" class="text-3xl font-black text-green-600 block">₹0</span>
+          <p class="text-[10px] text-gray-400">Gross commission generated</p>
+        </div>
+
+        <!-- Metric 4: Pending Payout -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Available for Payout</span>
+            <div class="w-8 h-8 rounded-xl bg-orange-50 text-secondary flex items-center justify-center text-sm">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+          </div>
+          <span id="metric-pending-payout" class="text-3xl font-black text-secondary block">₹0</span>
+          <p class="text-[10px] text-gray-400">Ready to transfer to UPI</p>
+        </div>
+
+      </div>
+
+      <!-- UPI Payout Settlement Bar -->
+      <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="space-y-0.5">
+          <h3 class="font-extrabold text-sm text-gray-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-money-bill-transfer text-green-600"></i>
+            <span>Instant UPI Cash Settlement</span>
+          </h3>
+          <p class="text-xs text-gray-500">
+            Transfers are sent directly to your registered UPI ID: <strong id="dash-upi-inline" class="text-gray-900 font-mono">-</strong>
+          </p>
+        </div>
+
+        <button onclick="requestUpiPayout()" id="dash-payout-btn" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-black text-xs px-6 py-3 rounded-2xl shadow-md transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Request Payout to UPI</span>
+        </button>
+      </div>
+
+      <!-- Referral Orders Table -->
+      <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm">
+        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+          <div>
+            <h3 class="font-black text-base text-gray-900">Referral Orders Breakdown</h3>
+            <p class="text-xs text-gray-500">Live ledger of purchases made using your link</p>
+          </div>
+          <button onclick="loadDashboardData()" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <span>Refresh</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-gray-700">
+            <thead class="bg-gray-50 border-b border-gray-200 text-gray-500 font-bold uppercase text-[10px] tracking-wider">
+              <tr>
+                <th class="p-4">Date</th>
+                <th class="p-4">Order Ref</th>
+                <th class="p-4">Customer Order Total</th>
+                <th id="dash-table-rate-th" class="p-4">Your Commission (10%)</th>
+                <th class="p-4 text-right">Status</th>
+              </tr>
+            </thead>
+            <tbody id="creator-orders-table" class="divide-y divide-gray-100">
+              <tr>
+                <td colspan="5" class="p-8 text-center text-gray-400">
+                  <i class="fa-solid fa-chart-line text-2xl text-gray-300 block mb-2"></i>
+                  0 orders placed through your link yet.
+                  <p class="text-[11px] text-gray-400 mt-1">Share your link to start earning commissions!</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Edit Creator Profile & Instagram Modal -->
+  <div id="edit-creator-profile-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden animate-fade">
+    <div class="bg-white rounded-3xl shadow-2xl border border-gray-200 w-full max-w-md overflow-hidden relative">
+      <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg shadow-inner">
+            <i class="fa-solid fa-user-pen"></i>
+          </div>
+          <div>
+            <h3 class="font-black text-base text-gray-900">Edit Creator Profile</h3>
+            <p class="text-xs text-gray-500">Update your Instagram handle, mobile &amp; UPI</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeEditProfileModal()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 flex items-center justify-center cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="edit-profile-form" onsubmit="handleSaveCreatorProfile(event)" class="p-6 space-y-4 text-left text-xs">
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Your Full Name *</label>
+          <input type="text" id="edit-c-name" required placeholder="Aman Sharma" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-gray-900 outline-none focus:border-secondary">
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Your Instagram Handle *</label>
+          <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden focus-within:border-secondary">
+            <span class="bg-gray-100 px-3 py-2.5 text-xs font-bold text-gray-500 border-r border-gray-200">@</span>
+            <input type="text" id="edit-c-instagram" required placeholder="yourhandle" class="w-full px-3 py-2.5 text-xs font-bold text-gray-900 outline-none">
+          </div>
+          <p class="text-[10px] text-gray-400 mt-1">This handle is linked to your creator profile and badge.</p>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">WhatsApp Mobile Number *</label>
+          <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden focus-within:border-secondary">
+            <span class="bg-gray-100 px-3 py-2.5 text-xs font-bold text-gray-500 border-r border-gray-200">+91</span>
+            <input type="tel" id="edit-c-phone" required maxlength="10" placeholder="7988456595" class="w-full px-3 py-2.5 text-xs font-bold text-gray-900 outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Payout UPI ID (GPay / PhonePe / Paytm) *</label>
+          <input type="text" id="edit-c-upi" required placeholder="yourhandle@upi or 7988456595@ybl" class="w-full border border-gray-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-gray-900 outline-none focus:border-secondary">
+          <p class="text-[10px] text-gray-400 mt-1">Weekly 10% commission will be transferred here directly.</p>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Your Referral Code</label>
+          <input type="text" id="edit-c-code" disabled class="w-full bg-gray-100 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs font-mono font-bold text-gray-500 uppercase">
+          <p class="text-[10px] text-gray-400 mt-0.5">Referral code is uniquely linked to your earnings tracking.</p>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-2">
+          <button type="button" onclick="closeEditProfileModal()" class="px-4 py-2.5 rounded-xl border border-gray-300 text-gray-600 font-bold hover:bg-gray-100 transition cursor-pointer">
+            Cancel
+          </button>
+          <button type="submit" id="btn-save-profile" class="bg-secondary hover:bg-secondaryHover text-white font-extrabold px-5 py-2.5 rounded-xl shadow transition cursor-pointer flex items-center gap-1.5 active:scale-98">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Save Profile</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-8 border-t border-gray-800 text-xs text-gray-400 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <p class="font-bold text-white text-sm">Avesh Technologies Creator Program</p>
+        <p class="text-[11px] text-gray-500">Official Creator Hub • New Delhi, India • WhatsApp Support: <strong>7988456595</strong></p>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/aveshtech.in/" target="_blank" class="hover:text-pink-400 transition"><i class="fa-brands fa-instagram text-base"></i> @aveshtech.in</a>
+        <button onclick="window.AveshAuth.logoutCreator()" class="text-red-400 hover:text-red-300 font-bold">Sign Out</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/supabase-config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/notifications.js"></script>
+
+  <script>
+    let activeCreator = null;
+    const safeEscape = (typeof window.escapeHTML === 'function') ? window.escapeHTML : (s => s);
+
+
+    function switchDashCreatorTab(tab = 'login') {
+      const formLogin = document.getElementById('dash-form-login');
+      const formReg = document.getElementById('dash-form-reg');
+      const btnLogin = document.getElementById('dash-tab-login');
+      const btnReg = document.getElementById('dash-tab-reg');
+      const errBox = document.getElementById('dash-auth-error');
+      if (errBox) { errBox.classList.add('hidden'); errBox.innerHTML = ''; }
+
+      if (tab === 'register') {
+        if (formLogin) formLogin.classList.add('hidden');
+        if (formReg) formReg.classList.remove('hidden');
+        if (btnLogin) btnLogin.className = 'flex-1 py-1.5 rounded-lg text-gray-500 hover:text-gray-900 transition font-bold cursor-pointer';
+        if (btnReg) btnReg.className = 'flex-1 py-1.5 rounded-lg bg-white text-secondary font-black shadow-xs transition cursor-pointer';
+      } else {
+        if (formLogin) formLogin.classList.remove('hidden');
+        if (formReg) formReg.classList.add('hidden');
+        if (btnLogin) btnLogin.className = 'flex-1 py-1.5 rounded-lg bg-white text-secondary font-black shadow-xs transition cursor-pointer';
+        if (btnReg) btnReg.className = 'flex-1 py-1.5 rounded-lg text-gray-500 hover:text-gray-900 transition font-bold cursor-pointer';
+      }
+    }
+
+    async function handleDashCreatorLogin(e) {
+      e.preventDefault();
+      const errBox = document.getElementById('dash-auth-error');
+      if (errBox) { errBox.classList.add('hidden'); errBox.innerHTML = ''; }
+      const id = document.getElementById('dash-login-id').value.trim();
+      const pass = document.getElementById('dash-login-pass').value.trim();
+      const btn = document.getElementById('dash-login-btn');
+      const orig = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs mr-2"></i> Signing In...';
+      }
+      try {
+        const inf = await window.AveshAuth.loginCreator(id, pass);
+        activeCreator = inf;
+        renderCreatorView();
+      } catch (err) {
+        const msg = err.message || 'Login failed. Please check your credentials.';
+        if (errBox) {
+          errBox.classList.remove('hidden');
+          errBox.innerHTML = `<strong>Error:</strong> ${safeEscape(msg)}`;
+        } else {
+          alert(msg);
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = orig;
+        }
+      }
+    }
+
+    async function handleDashCreatorRegister(e) {
+      e.preventDefault();
+      const errBox = document.getElementById('dash-auth-error');
+      if (errBox) { errBox.classList.add('hidden'); errBox.innerHTML = ''; }
+
+      const name = document.getElementById('dash-reg-name').value.trim();
+      const instagram = document.getElementById('dash-reg-instagram').value.trim();
+      const phone = document.getElementById('dash-reg-phone').value.trim();
+      const email = document.getElementById('dash-reg-email').value.trim();
+      const upi_id = document.getElementById('dash-reg-upi').value.trim();
+      const password = document.getElementById('dash-reg-pass').value.trim();
+      const ref_code = document.getElementById('dash-reg-code').value.trim();
+
+      const btn = document.getElementById('dash-reg-btn');
+      const orig = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs mr-2"></i> Creating Account...';
+      }
+      try {
+        const inf = await window.AveshAuth.registerCreator({ name, instagram, phone, email, upi_id, password, ref_code });
+        activeCreator = inf;
+        renderCreatorView();
+      } catch (err) {
+        const msg = err.message || 'Registration failed.';
+        if (errBox) {
+          errBox.classList.remove('hidden');
+          errBox.innerHTML = `<strong>Error:</strong> ${safeEscape(msg)}`;
+        } else {
+          alert(msg);
+        }
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = orig;
+        }
+      }
+    }
+
+    async function checkAuth() {
+      let creator = window.AveshAuth ? window.AveshAuth.getCreator() : null;
+      if (!creator) {
+        try {
+          const raw = localStorage.getItem('avesh_creator_session');
+          if (raw) creator = JSON.parse(raw);
+        } catch (e) {}
+      }
+
+      if (!creator) {
+        const savedCode = localStorage.getItem('avesh_logged_in_influencer');
+        if (savedCode) {
+          const inf = await window.AveshStore.getInfluencerByCode(savedCode);
+          if (inf) {
+            activeCreator = inf;
+            renderCreatorView();
+            return;
+          }
+        }
+        // If returning from Google OAuth redirect, show connecting banner while session hydrator works
+        if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) {
+          const lockedState = document.getElementById('creator-locked-state');
+          if (lockedState) {
+            lockedState.classList.remove('hidden');
+            const authErr = document.getElementById('dash-auth-error');
+            if (authErr) {
+              authErr.className = 'p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-center justify-center gap-2';
+              authErr.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-amber-600"></i> Connecting your Google account...';
+              authErr.classList.remove('hidden');
+            }
+          }
+          return;
+        }
+
+        // Show locked state
+        document.getElementById('creator-locked-state').classList.remove('hidden');
+        document.getElementById('creator-active-dashboard').classList.add('hidden');
+        return;
+      }
+
+      activeCreator = creator;
+      renderCreatorView();
+    }
+
+    async function renderCreatorView() {
+      document.getElementById('creator-locked-state').classList.add('hidden');
+      document.getElementById('creator-active-dashboard').classList.remove('hidden');
+
+      // Populate header
+      document.getElementById('header-creator-badge').classList.remove('hidden');
+      document.getElementById('header-creator-badge').classList.add('flex');
+      document.getElementById('header-creator-handle').textContent = activeCreator.instagram || activeCreator.name;
+
+      // Populate banner
+      document.getElementById('dash-creator-name').textContent = activeCreator.name;
+      document.getElementById('dash-creator-instagram').textContent = activeCreator.instagram;
+      document.getElementById('dash-creator-upi').textContent = activeCreator.upi_id;
+      document.getElementById('dash-upi-inline').textContent = activeCreator.upi_id;
+
+      // Populate link
+      const link = `${window.location.origin}/?ref=${activeCreator.ref_code}`;
+      document.getElementById('dash-share-link').value = link;
+
+      await loadDashboardData();
+    }
+
+    async function loadDashboardData() {
+      if (!activeCreator) return;
+
+      // Fetch fresh creator metrics
+      const freshInf = await window.AveshStore.getInfluencerByCode(activeCreator.ref_code);
+      if (freshInf) activeCreator = freshInf;
+
+      const rateVal = (typeof activeCreator.commission_rate === 'number' && activeCreator.commission_rate > 0)
+        ? activeCreator.commission_rate
+        : 0.10;
+      const ratePercent = Math.round(rateVal * 100);
+
+      // Update rate badge
+      const rateBadge = document.getElementById('dash-rate-badge');
+      if (rateBadge) {
+        if (ratePercent > 10) {
+          rateBadge.className = "bg-gradient-to-r from-amber-400 to-yellow-300 text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full shadow flex items-center gap-1";
+          rateBadge.innerHTML = `<i class="fa-solid fa-crown text-[9px]"></i> VIP Tier: ${ratePercent}% Commission Rate`;
+        } else {
+          rateBadge.className = "text-xs text-gray-300 font-mono";
+          rateBadge.textContent = `${ratePercent}% Flat Commission`;
+        }
+      }
+
+      // Update metric and table headers
+      const metricRateLabel = document.getElementById('dash-metric-rate-label');
+      if (metricRateLabel) metricRateLabel.textContent = `Total Earned (${ratePercent}%)`;
+      const tableRateTh = document.getElementById('dash-table-rate-th');
+      if (tableRateTh) tableRateTh.textContent = `Your Commission (${ratePercent}%)`;
+
+      document.getElementById('metric-clicks').textContent = activeCreator.total_clicks || 0;
+      document.getElementById('metric-orders').textContent = activeCreator.total_orders || 0;
+      document.getElementById('metric-total-earned').textContent = window.formatINR(activeCreator.total_commission || 0);
+      document.getElementById('metric-pending-payout').textContent = window.formatINR(activeCreator.pending_payout || 0);
+
+      // Disable or enable payout button
+      const payoutBtn = document.getElementById('dash-payout-btn');
+      if (payoutBtn) {
+        if (!activeCreator.pending_payout || activeCreator.pending_payout <= 0) {
+          payoutBtn.classList.add('opacity-50', 'pointer-events-none');
+          payoutBtn.innerHTML = `<i class="fa-solid fa-check"></i> <span>All Commissions Settled</span>`;
+        } else {
+          payoutBtn.classList.remove('opacity-50', 'pointer-events-none');
+          payoutBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Request Payout of ${window.formatINR(activeCreator.pending_payout)} to UPI</span>`;
+        }
+      }
+
+      // Load referral orders (Instant synchronous resolution)
+      let myLogs = (window.AveshStore && typeof window.AveshStore.getReferralLogsSync === 'function')
+        ? window.AveshStore.getReferralLogsSync(activeCreator.ref_code)
+        : (await window.AveshStore.getReferralLogs(activeCreator.ref_code));
+      const allOrders = (window.AveshStore && typeof window.AveshStore.getOrdersSync === 'function')
+        ? window.AveshStore.getOrdersSync()
+        : (await window.AveshStore.getOrders());
+      const refOrders = allOrders.filter(o => o.referral_code && o.referral_code.toLowerCase() === activeCreator.ref_code.toLowerCase());
+
+      // Merge unique orders by order_id
+      const mergedMap = new Map();
+      (myLogs || []).forEach(o => {
+        if (o.order_id) mergedMap.set(o.order_id, o);
+      });
+      refOrders.forEach(o => {
+        if (!mergedMap.has(o.id)) {
+          mergedMap.set(o.id, {
+            order_id: o.id,
+            order_amount: o.total,
+            commission_amount: o.influencer_commission || Math.round(o.total * rateVal),
+            status: 'confirmed',
+            created_at: o.created_at
+          });
+        }
+      });
+      const myOrders = Array.from(mergedMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+      const tbody = document.getElementById('creator-orders-table');
+      if (tbody) {
+        if (!myOrders || myOrders.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="5" class="p-8 text-center text-gray-400">
+                <i class="fa-solid fa-chart-line text-2xl text-gray-300 block mb-2"></i>
+                No orders placed through your referral code <strong>${activeCreator.ref_code.toUpperCase()}</strong> yet.
+                <p class="text-[11px] text-gray-400 mt-1">Paste your link in your Instagram bio or video descriptions to start earning!</p>
+              </td>
+            </tr>
+          `;
+        } else {
+          tbody.innerHTML = myOrders.map(o => `
+            <tr class="hover:bg-gray-50 transition">
+              <td class="p-4 text-gray-500">${new Date(o.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+              <td class="p-4 font-mono font-bold text-gray-800">${safeEscape(o.order_id || 'ORD-REF')}</td>
+              <td class="p-4 font-bold text-gray-900">${window.formatINR(o.order_amount || o.total || 0)}</td>
+              <td class="p-4 font-extrabold text-green-600">+${window.formatINR(o.commission_amount || Math.round((o.total || 0) * rateVal))}</td>
+              <td class="p-4 text-right">
+                <span class="bg-green-100 text-green-700 font-bold text-[10px] uppercase px-2 py-0.5 rounded">Confirmed</span>
+              </td>
+            </tr>
+          `).join('');
+        }
+      }
+    }
+
+    function copyCreatorLink() {
+      const linkInput = document.getElementById('dash-share-link');
+      linkInput.select();
+      navigator.clipboard.writeText(linkInput.value);
+      
+      const btnLabel = document.getElementById('copy-btn-label');
+      btnLabel.textContent = 'Copied!';
+      window.showToast('Referral link copied to clipboard!');
+      setTimeout(() => { btnLabel.textContent = 'Copy Link'; }, 2000);
+    }
+
+    function shareWhatsApp() {
+      if (!activeCreator) return;
+      const url = `${window.location.origin}/?ref=${activeCreator.ref_code}`;
+      const msg = encodeURIComponent(`Hey! Check out Avesh Technologies for custom 3D prints, 3D shadow light lamps, and IoT prototyping kits. Use my link for an extra 5% off: ${url}`);
+      window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+    }
+
+    async function requestUpiPayout() {
+      if (!activeCreator || !activeCreator.pending_payout) return;
+      const amount = activeCreator.pending_payout;
+
+      if (confirm(`Confirm payout request of ₹${amount} to UPI ID: ${activeCreator.upi_id}?`)) {
+        try {
+          await window.AveshStore.requestPayout(activeCreator.ref_code, amount);
+          window.showToast(`Payout request for ₹${amount} submitted! Store admin will transfer via UPI.`);
+          await loadDashboardData();
+        } catch (e) {
+          alert(e.message);
+        }
+      }
+    }
+
+    function openEditProfileModal() {
+      if (!activeCreator) return;
+      const modal = document.getElementById('edit-creator-profile-modal');
+      if (!modal) return;
+
+      document.getElementById('edit-c-name').value = activeCreator.name || '';
+      const cleanInsta = (activeCreator.instagram || '').replace(/^@/, '');
+      document.getElementById('edit-c-instagram').value = cleanInsta;
+      document.getElementById('edit-c-phone').value = (activeCreator.phone || '').replace(/[^0-9]/g, '').slice(-10);
+      document.getElementById('edit-c-upi').value = activeCreator.upi_id || '';
+      document.getElementById('edit-c-code').value = (activeCreator.ref_code || '').toUpperCase();
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeEditProfileModal() {
+      const modal = document.getElementById('edit-creator-profile-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    async function handleSaveCreatorProfile(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (!activeCreator) return;
+
+      const newName = document.getElementById('edit-c-name').value.trim();
+      let newInsta = document.getElementById('edit-c-instagram').value.trim();
+      const newPhone = document.getElementById('edit-c-phone').value.trim().replace(/[^0-9]/g, '').slice(-10);
+      const newUpi = document.getElementById('edit-c-upi').value.trim();
+
+      if (!newName || !newInsta || !newPhone || !newUpi) {
+        alert('Please fill in your name, Instagram handle, WhatsApp number, and UPI ID.');
+        return;
+      }
+
+      if (newInsta.startsWith('@')) newInsta = newInsta.substring(1);
+      const formattedInsta = '@' + newInsta;
+
+      const btn = document.getElementById('btn-save-profile');
+      const orig = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i> Saving...';
+      }
+
+      try {
+        activeCreator.name = newName;
+        activeCreator.instagram = formattedInsta;
+        activeCreator.phone = newPhone;
+        activeCreator.upi_id = newUpi;
+
+        localStorage.setItem('avesh_creator_session', JSON.stringify(activeCreator));
+
+        const influencers = (window.AveshStore && typeof window.AveshStore.getInfluencersSync === 'function')
+          ? window.AveshStore.getInfluencersSync()
+          : JSON.parse(localStorage.getItem('avesh_influencers_v1') || '[]');
+        const inf = influencers.find(i => (i.ref_code || '').toLowerCase() === (activeCreator.ref_code || '').toLowerCase());
+        if (inf) {
+          inf.name = newName;
+          inf.instagram = formattedInsta;
+          inf.phone = newPhone;
+          inf.upi_id = newUpi;
+          localStorage.setItem('avesh_influencers_v1', JSON.stringify(influencers));
+        }
+
+        // Sync with Supabase cloud database
+        const sb = await window.waitForSupabase(2500);
+        if (sb && typeof sb.from === 'function') {
+          await sb.from('influencers').update({
+            name: newName,
+            instagram: formattedInsta,
+            phone: newPhone,
+            upi_id: newUpi
+          }).eq('ref_code', activeCreator.ref_code);
+        }
+
+        // Update UI
+        document.getElementById('dash-creator-name').textContent = activeCreator.name;
+        document.getElementById('dash-creator-instagram').textContent = activeCreator.instagram;
+        document.getElementById('dash-creator-upi').textContent = activeCreator.upi_id;
+        document.getElementById('dash-upi-inline').textContent = activeCreator.upi_id;
+        const headerHandle = document.getElementById('header-creator-handle');
+        if (headerHandle) headerHandle.textContent = activeCreator.instagram;
+
+        closeEditProfileModal();
+        if (window.showToast) window.showToast('Profile & Instagram handle updated successfully!', 'success');
+      } catch (err) {
+        alert(err.message || 'Could not update profile.');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = orig;
+        }
+      }
+    }
+
+    function editUpiIdModal() {
+      openEditProfileModal();
+    }
+
+    document.addEventListener('DOMContentLoaded', checkAuth);
+  </script>
+</body>
+</html>
